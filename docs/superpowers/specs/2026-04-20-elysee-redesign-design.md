@@ -439,13 +439,15 @@ All sample content lives in MDX collections so the client can edit without touch
 
 ### 11.3 Handoff checklist
 
-- [ ] All three pages built and polished
-- [ ] Reduced-motion variant verified in browser devtools
-- [ ] Lighthouse ≥ 95 (perf / accessibility / SEO) on production build
-- [ ] No console errors in production
-- [ ] Browser matrix tested: latest Safari, Chrome, Firefox; Safari iOS 17+; Chrome Android latest
-- [ ] README complete
-- [ ] 8-10 sample products, 4 sectors, 4 insights in MDX
+- [x] All three pages built and polished
+- [x] Reduced-motion variant verified (code-audit pass across all 5 motion entry points; browser devtools not tested)
+- [ ] Lighthouse ≥ 95 (perf / accessibility / SEO) on production build — **deferred, requires real browser run**
+- [x] No console errors at build/check level; production browser console not tested
+- [ ] Browser matrix tested: latest Safari, Chrome, Firefox; Safari iOS 17+; Chrome Android latest — **deferred, requires real browsers**
+- [x] README complete
+- [x] 8 products (including Epsilon), 4 sectors, 4 insights in MDX
+
+> **Note:** Browser and Lighthouse items deferred — run manually before client sign-off.
 
 ---
 
