@@ -16,5 +16,5 @@
   --color-accent-water: #6fb8c2;
   --font-display: 'Fraunces', Georgia, serif;
   --font-body: 'Inter Tight', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
 }
