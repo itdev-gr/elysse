@@ -1,0 +1,17 @@
+---
+const text = `Since 1979, we've built systems that carry water — and everything water carries. Through fields and cities, factories and gardens, across 65 countries. A quieter kind of infrastructure, built to last.`;
+const words = text.split(/\s+/);
+---
+<section data-section="manifesto" id="manifesto" class="relative z-10 bg-surface-deep text-text-primary" data-manifesto-wrap>
+  <div class="h-screen flex items-center px-[var(--margin)]" data-manifesto-inner>
+    <div class="max-w-[80ch]">
+      <p class="mono mb-8 text-text-mono">— Our quieter infrastructure</p>
+      <p class="display-md leading-[1.05] font-display font-medium tracking-[-0.02em]" data-manifesto-text>
+        {words.map(w => <span data-mword class="opacity-20 transition-colors">{w} </span>)}
+      </p>
+    </div>
+    <svg class="pointer-events-none absolute inset-0 w-full h-full" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true">
+      <path data-manifesto-wave d="M0 600 C 300 520, 600 680, 900 580 S 1200 640, 1200 640" stroke="currentColor" stroke-width="1.5" fill="none" class="text-accent-deep" stroke-dasharray="2500" stroke-dashoffset="2500" />
+    </svg>
+  </div>
+</section>

@@ -2,20 +2,26 @@
 import Base from '~/layouts/Base.astro';
 import ParticleFlow from '~/components/hero/ParticleFlow.astro';
 import Hero from '~/components/sections/Hero.astro';
+import Manifesto from '~/components/sections/Manifesto.astro';
 ---
 <Base title="Elysee Irrigation — Streaming water, streaming life">
   <ParticleFlow />
   <Hero />
+  <Manifesto />
 
   <script>
     import { playHero } from '~/scripts/motion/timelines/hero';
+    import { initManifesto } from '~/scripts/motion/timelines/manifesto';
     import { prefersReducedMotion } from '~/scripts/utils/reducedMotion';
-    if (!prefersReducedMotion()) {
-      window.addEventListener('DOMContentLoaded', () => playHero());
-    } else {
-      // Instant reveal for reduced motion
-      document.querySelectorAll('[data-section="hero"] [data-word]').forEach(el => (el as HTMLElement).style.transform = 'translateY(0)');
-      document.querySelectorAll('[data-section="hero"] .mono').forEach(el => { (el as HTMLElement).style.opacity = '1'; (el as HTMLElement).style.transform = 'none'; });
-    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      if (prefersReducedMotion()) {
+        document.querySelectorAll('[data-word]').forEach(el => (el as HTMLElement).style.transform = 'translateY(0)');
+        document.querySelectorAll('[data-mword]').forEach(el => (el as HTMLElement).style.opacity = '1');
+        return;
+      }
+      playHero();
+      initManifesto();
+    });
   </script>
 </Base>
