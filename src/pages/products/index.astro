@@ -1,0 +1,38 @@
+---
+import Base from '~/layouts/Base.astro';
+import ParticleFlow from '~/components/hero/ParticleFlow.astro';
+import ProductCard from '~/components/products/ProductCard.astro';
+import FilterRail from '~/components/products/FilterRail.astro';
+import { getCollection } from 'astro:content';
+
+const products = (await getCollection('products')).sort((a, b) => (b.data.featured ? 1 : 0) - (a.data.featured ? 1 : 0));
+---
+<Base title="Products — Elysee Irrigation" description="5,000+ product codes across four sectors. Compression fittings, valves, saddles, couplings.">
+  <ParticleFlow />
+  <section class="relative z-10 min-h-[60vh] flex items-end px-[var(--margin)] pb-24 pt-32">
+    <div>
+      <p class="mono text-text-mono mb-4">Products</p>
+      <h1 class="display-xl font-display tracking-[-0.025em] leading-[0.88]">Products<span class="serif-italic">.</span></h1>
+      <p class="mono text-text-secondary mt-6">5,000+ codes · 4 sectors · 65 countries</p>
+    </div>
+  </section>
+
+  <section class="relative z-10 grid grid-cols-12 gap-6 px-[var(--margin)] pb-32">
+    <div class="col-span-12 md:col-span-3 lg:col-span-2"><FilterRail /></div>
+    <div class="col-span-12 md:col-span-9 lg:col-span-10">
+      <div data-products-grid class="grid grid-cols-2 md:grid-cols-3 gap-6 auto-rows-[minmax(240px,auto)]">
+        {products.map(p => <ProductCard product={p} featured={p.data.featured} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative z-10 border-t border-hairline py-24 px-[var(--margin)] flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+    <h2 class="display-sm font-display">Not sure which fitting fits?</h2>
+    <a href="/#contact" class="mono text-accent-bright hover:text-text-primary">Talk to an engineer →</a>
+  </section>
+
+  <script>
+    import { initProductsFilter } from '~/scripts/motion/timelines/productsFilter';
+    window.addEventListener('DOMContentLoaded', () => initProductsFilter());
+  </script>
+</Base>

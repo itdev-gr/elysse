@@ -1,0 +1,31 @@
+---
+const categories = [
+  { slug: 'all', label: 'All' },
+  { slug: 'compression-fittings', label: 'Compression Fittings' },
+  { slug: 'pvc-ball-valves', label: 'PVC Ball Valves' },
+  { slug: 'saddles', label: 'Saddles' },
+  { slug: 'adaptor-flanged', label: 'Adaptor Flanged' },
+  { slug: 'couplings', label: 'Couplings' },
+  { slug: 'valves', label: 'Valves' }
+];
+---
+<aside data-filter-rail class="sticky top-24 self-start">
+  <p class="mono text-text-mono mb-4">Filter</p>
+  <ul class="flex md:flex-col flex-wrap gap-2">
+    {categories.map(c => (
+      <li>
+        <button
+          data-filter
+          data-active={c.slug === 'all' ? 'true' : 'false'}
+          data-slug={c.slug}
+          class="group relative mono uppercase tracking-[0.18em] text-xs py-1 px-0 text-text-secondary data-[active=true]:text-accent-bright transition-colors"
+        >
+          <span class="relative">
+            {c.label}
+            <span data-filter-underline class="absolute left-0 -bottom-1 h-px bg-accent-bright origin-left scale-x-0 w-full transition-transform duration-500 group-data-[active=true]:scale-x-100"></span>
+          </span>
+        </button>
+      </li>
+    ))}
+  </ul>
+</aside>
