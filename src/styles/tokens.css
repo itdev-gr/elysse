@@ -1,0 +1,39 @@
+:root {
+  /* Surfaces */
+  --surface-deep: #0a1410;
+  --surface-relief: #0d1f16;
+  --surface-break: #f2ede3;
+
+  /* Text */
+  --text-primary: #f2ede3;
+  --text-secondary: #a8c4b2;
+  --text-mono: #7eb08c;
+
+  /* Accents */
+  --accent-bright: #aee4be;
+  --accent-primary: #7eb08c;
+  --accent-deep: #3d6b52;
+  --accent-water: #6fb8c2;
+
+  /* Utility */
+  --hairline: rgba(242, 237, 227, 0.12);
+
+  /* Type */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter Tight', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  /* Grid */
+  --container: 1440px;
+  --gutter: 24px;
+  --margin: 80px;
+
+  /* Transition */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@media (max-width: 1023px) { :root { --margin: 48px; --gutter: 20px; } }
+@media (max-width: 767px)  { :root { --margin: 24px; --gutter: 16px; } }
+
+html { background: var(--surface-deep); color: var(--text-primary); }

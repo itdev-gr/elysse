@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@import "./reset.css";
+@import "./tokens.css";
+@import "./typography.css";
+
+@theme {
+  --color-surface-deep: #0a1410;
+  --color-surface-relief: #0d1f16;
+  --color-surface-break: #f2ede3;
+  --color-text-primary: #f2ede3;
+  --color-text-secondary: #a8c4b2;
+  --color-text-mono: #7eb08c;
+  --color-accent-bright: #aee4be;
+  --color-accent-primary: #7eb08c;
+  --color-accent-deep: #3d6b52;
+  --color-accent-water: #6fb8c2;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter Tight', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
