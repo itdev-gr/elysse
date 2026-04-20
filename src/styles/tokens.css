@@ -37,3 +37,13 @@
 @media (max-width: 767px)  { :root { --margin: 24px; --gutter: 16px; } }
 
 html { background: var(--surface-deep); color: var(--text-primary); }
+
+:focus-visible {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+[data-cursor] { display: none; }
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  [data-cursor] { display: block; }
+}

@@ -40,4 +40,20 @@ export function initFourWorlds() {
       panels.forEach(p => { p.style.width = '100vw'; p.style.height = '100vh'; });
     }
   });
+
+  window.addEventListener('keydown', (e) => {
+    const active = document.activeElement;
+    const inPin = pin?.contains(active as Node);
+    if (!inPin && e.target !== document.body) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      const direction = e.key === 'ArrowRight' ? 1 : -1;
+      const st = ScrollTrigger.getAll().find(x => x.trigger === pin);
+      if (!st) return;
+      const progress = st.progress;
+      const target = Math.max(0, Math.min(1, progress + direction * (1 / (total - 1))));
+      const scrollPos = st.start + (st.end - st.start) * target;
+      window.scrollTo({ top: scrollPos, behavior: 'smooth' });
+      e.preventDefault();
+    }
+  });
 }
