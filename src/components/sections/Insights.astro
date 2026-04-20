@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 const insights = (await getCollection('insights')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 <section data-section="insights" id="insights" class="relative z-10 min-h-[80vh] py-24" aria-label="Latest insights">
-  <header class="px-[var(--margin)] mb-10 flex items-end justify-between">
+  <header class="page-x mb-10 flex items-end justify-between">
     <div>
       <p class="mono text-text-mono mb-3">VII · Insights</p>
       <h2 class="display-md font-display tracking-[-0.02em]">Latest <span class="serif-italic">signals.</span></h2>
@@ -11,7 +11,7 @@ const insights = (await getCollection('insights')).sort((a, b) => b.data.date.ge
     <a href="#" class="mono text-text-mono hover:text-accent-bright">View all →</a>
   </header>
 
-  <div data-insights-track class="flex gap-8 overflow-x-auto scroll-smooth cursor-grab pl-[var(--margin)]" role="list">
+  <div data-insights-track class="flex gap-8 overflow-x-auto scroll-smooth cursor-grab page-l" role="list">
     {insights.map(it => (
       <article role="listitem" class="flex-shrink-0 w-[min(520px,80vw)] group">
         <div class="aspect-[4/3] overflow-hidden rounded-md bg-surface-relief">
@@ -26,6 +26,6 @@ const insights = (await getCollection('insights')).sort((a, b) => b.data.date.ge
         <p class="mt-2 text-text-secondary max-w-md">{it.data.excerpt}</p>
       </article>
     ))}
-    <div class="flex-shrink-0 w-[var(--margin)]"></div>
+    <div class="flex-shrink-0 page-w"></div>
   </div>
 </section>

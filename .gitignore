@@ -10,3 +10,9 @@ dist/
 .vscode/
 .idea/
 coverage/
+
+# Playwright screenshots + snapshots from visual debugging
+.playwright-mcp/
+before-*.png
+after-*.png
+final-*.png

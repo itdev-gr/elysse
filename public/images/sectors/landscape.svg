@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ecebe1"/>
+      <stop offset="100%" stop-color="#c8d4c1"/>
+    </linearGradient>
+    <pattern id="p" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="20" cy="20" r="1.5" fill="#3d6b52" opacity="0.25"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="1600" fill="url(#g)"/>
+  <rect width="1200" height="1600" fill="url(#p)"/>
+  <text x="60" y="120" font-family="Georgia,serif" font-size="36" fill="#1a3d2a" font-style="italic" opacity="0.6">landscape</text>
+  <text x="60" y="1540" font-family="ui-monospace,Menlo,monospace" font-size="13" fill="#1a3d2a" letter-spacing="3" opacity="0.45">ELYSEE · PLACEHOLDER</text>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6f4ec"/>
+      <stop offset="100%" stop-color="#d8e1d1"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <path d="M 0 600 Q 300 480 600 580 T 1200 560" stroke="#3d6b52" stroke-width="1.4" fill="none" opacity="0.6"/>
+  <path d="M 0 620 Q 300 500 600 600 T 1200 580" stroke="#3d6b52" stroke-width="0.8" fill="none" opacity="0.3"/>
+  <text x="60" y="100" font-family="Georgia,serif" font-size="30" fill="#1a3d2a" font-style="italic" opacity="0.55">beyond-the-field</text>
+  <text x="60" y="860" font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#1a3d2a" letter-spacing="3" opacity="0.45">ELYSEE · INSIGHTS</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" preserveAspectRatio="xMidYMid slice">
+  <rect width="800" height="1000" fill="#ecebe1"/>
+  <g transform="translate(400,500)" fill="none" stroke="#1a3d2a" stroke-width="1.2" opacity="0.7">
+    <ellipse rx="220" ry="70"/>
+    <ellipse rx="180" ry="54" opacity="0.5"/>
+    <circle r="42" stroke-width="0.8"/>
+    <polygon points="-140,-30 -110,-42 110,-42 140,-30 110,-20 -110,-20"/>
+  </g>
+  <text x="40" y="60" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#2d5540" letter-spacing="3">ELYSEE · single-4-bolts</text>
+</svg>

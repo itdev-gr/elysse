@@ -22,7 +22,7 @@ const productLd = {
 <Base title="Epsilon Series — Elysee Irrigation" description={epsilon.data.blurb} jsonLd={productLd}>
   <ParticleFlow />
 
-  <section data-section="e1-reveal" class="relative z-10 min-h-screen flex items-center justify-center px-[var(--margin)]">
+  <section data-section="e1-reveal" class="relative z-10 min-h-screen flex items-center justify-center page-x">
     <div class="text-center">
       <p class="mono text-text-mono mb-6" data-e1-subline>ε · EPSILON SERIES</p>
       <h1 class="display-xl font-display tracking-[-0.025em] leading-[0.9]" data-e1-title>Compression,<br/><span class="serif-italic">perfected.</span></h1>
@@ -31,14 +31,14 @@ const productLd = {
   </section>
 
   <section data-section="e2-disassembly" class="relative z-10">
-    <div data-e2-pin class="h-screen flex items-center justify-center px-[var(--margin)]">
+    <div data-e2-pin class="h-screen flex items-center justify-center page-x">
       <div class="w-full max-w-5xl aspect-[8/5] relative">
         <EpsilonStage />
       </div>
     </div>
   </section>
 
-  <section data-section="e3-specs" class="relative z-10 min-h-screen px-[var(--margin)] py-24">
+  <section data-section="e3-specs" class="relative z-10 min-h-screen page-x py-24">
     <div class="grid grid-cols-12 gap-6">
       <div class="col-span-12 md:col-span-5">
         <p class="mono text-text-mono mb-4">III · Specs</p>
@@ -64,10 +64,10 @@ const productLd = {
   </section>
 
   <section data-section="e4-install" class="relative z-10 h-screen overflow-hidden">
-    <div data-e4-pin class="h-full flex items-center px-[var(--margin)] gap-6">
+    <div data-e4-pin class="h-full flex items-center page-x gap-6">
       {[1,2,3,4].map(step => (
         <figure data-e4-frame data-step={step} class="flex-shrink-0 w-[80vw] md:w-[42vw] aspect-[3/4] rounded-md overflow-hidden bg-surface-relief relative transition-opacity duration-500">
-          <img src={`/images/products/epsilon-hero.jpg`} alt={`Installation step ${step}`} class="w-full h-full object-cover" width="900" height="1200" loading="lazy" />
+          <img src={`/images/products/epsilon-hero.svg`} alt={`Installation step ${step}`} class="w-full h-full object-cover" width="900" height="1200" loading="lazy" />
           <figcaption class="absolute bottom-0 left-0 right-0 p-6">
             <p class="mono text-accent-bright">STEP 0{step}</p>
             <p class="mono text-text-secondary mt-1">Installation phase {step} placeholder caption.</p>
@@ -77,7 +77,7 @@ const productLd = {
     </div>
   </section>
 
-  <section data-section="e5-related" class="relative z-10 min-h-screen px-[var(--margin)] py-24">
+  <section data-section="e5-related" class="relative z-10 min-h-screen page-x py-24">
     <header class="mb-12">
       <p class="mono text-text-mono mb-3">V · Compatible</p>
       <h2 class="display-md font-display tracking-[-0.02em]">Works with<span class="serif-italic">.</span></h2>

@@ -11,15 +11,16 @@ export interface FlowPreset {
   speed: number;
 }
 
+// Base (color1) is warm cream #f6f4ec ≈ [0.963, 0.956, 0.926]. Accent tints (color2) are muted green/moss/water.
 export const PRESETS: Record<string, FlowPreset> = {
-  hero:      { color1: [0.04, 0.08, 0.06], color2: [0.50, 0.70, 0.55], flowStrength: 0.25, density: 3.0, speed: 1.0 },
-  agri:      { color1: [0.05, 0.12, 0.07], color2: [0.68, 0.89, 0.74], flowStrength: 0.30, density: 4.0, speed: 0.8 },
-  landscape: { color1: [0.04, 0.10, 0.08], color2: [0.43, 0.72, 0.76], flowStrength: 0.18, density: 2.5, speed: 0.6 },
-  building:  { color1: [0.04, 0.06, 0.04], color2: [0.35, 0.45, 0.40], flowStrength: 0.10, density: 5.0, speed: 1.3 },
-  industry:  { color1: [0.05, 0.10, 0.07], color2: [0.49, 0.69, 0.55], flowStrength: 0.08, density: 6.5, speed: 1.6 },
-  counters:  { color1: [0.04, 0.09, 0.06], color2: [0.68, 0.89, 0.74], flowStrength: 0.22, density: 3.5, speed: 0.9 },
-  map:       { color1: [0.03, 0.07, 0.06], color2: [0.43, 0.72, 0.76], flowStrength: 0.15, density: 2.0, speed: 0.5 },
-  epsilon:   { color1: [0.04, 0.08, 0.06], color2: [0.68, 0.89, 0.74], flowStrength: 0.12, density: 4.5, speed: 1.1 }
+  hero:      { color1: [0.963, 0.956, 0.926], color2: [0.48, 0.62, 0.52], flowStrength: 0.22, density: 3.2, speed: 0.9 },
+  agri:      { color1: [0.955, 0.955, 0.920], color2: [0.42, 0.60, 0.44], flowStrength: 0.28, density: 4.0, speed: 0.8 },
+  landscape: { color1: [0.940, 0.955, 0.930], color2: [0.36, 0.58, 0.56], flowStrength: 0.18, density: 2.6, speed: 0.6 },
+  building:  { color1: [0.960, 0.958, 0.940], color2: [0.32, 0.44, 0.38], flowStrength: 0.10, density: 5.0, speed: 1.2 },
+  industry:  { color1: [0.955, 0.950, 0.920], color2: [0.28, 0.46, 0.34], flowStrength: 0.10, density: 6.0, speed: 1.4 },
+  counters:  { color1: [0.960, 0.950, 0.930], color2: [0.40, 0.62, 0.48], flowStrength: 0.20, density: 3.4, speed: 0.9 },
+  map:       { color1: [0.940, 0.948, 0.930], color2: [0.24, 0.48, 0.52], flowStrength: 0.14, density: 2.2, speed: 0.55 },
+  epsilon:   { color1: [0.958, 0.955, 0.930], color2: [0.36, 0.56, 0.44], flowStrength: 0.13, density: 4.2, speed: 1.0 }
 };
 
 export function lerpPreset(a: FlowPreset, b: FlowPreset, t: number): FlowPreset {
@@ -46,7 +47,7 @@ export function createParticleFlow(container: HTMLElement): ParticleFlow | null 
   const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
   const renderer = new Renderer({ dpr, alpha: false });
   const gl = renderer.gl;
-  gl.clearColor(0.04, 0.08, 0.06, 1);
+  gl.clearColor(0.963, 0.956, 0.926, 1);
   container.appendChild(gl.canvas);
   Object.assign(gl.canvas.style, {
     position: 'fixed', inset: '0', width: '100%', height: '100%', zIndex: '0', pointerEvents: 'none'

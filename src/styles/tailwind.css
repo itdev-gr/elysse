@@ -4,17 +4,17 @@
 @import "./typography.css";
 
 @theme {
-  --color-surface-deep: #0a1410;
-  --color-surface-relief: #0d1f16;
-  --color-surface-break: #f2ede3;
-  --color-text-primary: #f2ede3;
-  --color-text-secondary: #a8c4b2;
-  --color-text-mono: #7eb08c;
-  --color-accent-bright: #aee4be;
-  --color-accent-primary: #7eb08c;
-  --color-accent-deep: #3d6b52;
-  --color-accent-water: #6fb8c2;
-  --color-hairline: rgba(242, 237, 227, 0.12);
+  --color-surface-deep: #f6f4ec;
+  --color-surface-relief: #ecebe1;
+  --color-surface-break: #0c1a14;
+  --color-text-primary: #0c1a14;
+  --color-text-secondary: #3d5a48;
+  --color-text-mono: #2d5540;
+  --color-accent-bright: #1a3d2a;
+  --color-accent-primary: #3d6b52;
+  --color-accent-deep: #0f2a1d;
+  --color-accent-water: #24545a;
+  --color-hairline: rgba(12, 26, 20, 0.14);
   --font-display: 'Fraunces', Georgia, serif;
   --font-body: 'Inter Tight', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;

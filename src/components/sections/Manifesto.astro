@@ -3,11 +3,11 @@ const text = `Since 1979, we've built systems that carry water — and everythin
 const words = text.split(/\s+/);
 ---
 <section data-section="manifesto" id="manifesto" aria-label="Our manifesto" class="relative z-10 bg-surface-deep text-text-primary" data-manifesto-wrap>
-  <div class="h-screen flex items-center px-[var(--margin)]" data-manifesto-inner>
+  <div class="h-screen flex items-center page-x" data-manifesto-inner>
     <div class="max-w-[80ch]">
       <p class="mono mb-8 text-text-mono">— Our quieter infrastructure</p>
-      <p class="display-md leading-[1.05] font-display font-medium tracking-[-0.02em]" data-manifesto-text>
-        {words.map(w => <span data-mword class="opacity-20 transition-colors">{w} </span>)}
+      <p class="font-display font-medium tracking-[-0.015em] leading-[1.12]" style="font-size: clamp(28px, 3.6vw, 56px);" data-manifesto-text>
+        {words.map(w => <span data-mword class="opacity-25 transition-colors">{w} </span>)}
       </p>
     </div>
     <svg class="pointer-events-none absolute inset-0 w-full h-full" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true">

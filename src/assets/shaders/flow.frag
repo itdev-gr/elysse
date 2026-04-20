@@ -9,7 +9,6 @@ uniform float uFlowStrength;
 uniform float uDensity;
 uniform float uSpeed;
 
-// Simplex-like noise (cheap approximation)
 float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 float noise(vec2 p) {
   vec2 i = floor(p), f = fract(p);
@@ -19,6 +18,16 @@ float noise(vec2 p) {
   float d = hash(i + vec2(1.0, 1.0));
   vec2 u = f * f * (3.0 - 2.0 * f);
   return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+}
+float fbm(vec2 p) {
+  float v = 0.0;
+  float a = 0.5;
+  for (int i = 0; i < 4; i++) {
+    v += a * noise(p);
+    p *= 2.0;
+    a *= 0.5;
+  }
+  return v;
 }
 
 vec2 curl(vec2 p) {
@@ -34,18 +43,27 @@ void main() {
   vec2 uv = vUv;
   vec2 aspect = vec2(uResolution.x / uResolution.y, 1.0);
   vec2 p = uv * aspect * uDensity;
-  p += uTime * uSpeed * 0.05;
+  p += uTime * uSpeed * 0.04;
   vec2 flow = curl(p) * uFlowStrength;
 
-  // Mouse curl
   vec2 mouseDist = uv - uMouse;
-  float mouseInf = exp(-dot(mouseDist, mouseDist) * 20.0) * 0.3;
+  float mouseInf = exp(-dot(mouseDist, mouseDist) * 18.0) * 0.25;
   flow += mouseInf * vec2(-mouseDist.y, mouseDist.x);
 
-  float particle = noise(p + flow * 5.0);
-  particle = smoothstep(0.45, 0.55, particle);
+  // Very subtle green tint over cream — type must stay dominant
+  vec3 base = uColor1;
+  float particle = fbm(p * 1.2 + flow * 2.5);
+  particle = smoothstep(0.35, 0.70, particle);
+  float grain = (noise(p * 18.0) - 0.5) * 0.015;
 
-  vec3 col = mix(uColor1, uColor2, particle);
-  col *= 0.12 + particle * 0.4; // Subtle overall
+  // Cap the tint influence at 0.10 so the canvas reads as cream
+  float tintAmount = particle * 0.10 + grain;
+  vec3 col = mix(base, uColor2, tintAmount);
+
+  // Soft radial settle — slightly lighter center, darker edges, very gentle
+  vec2 v = uv - 0.5;
+  float vig = 1.0 - dot(v, v) * 0.18;
+  col *= vig;
+
   gl_FragColor = vec4(col, 1.0);
 }

@@ -17,7 +17,7 @@ const lines = markets.map(m => {
   return { path: `M ${hqX} ${hqY} Q ${mx} ${my} ${x} ${y}`, end: [x, y] as const, label: m.label, primary: !!m.primary };
 });
 ---
-<section data-section="global-map" class="relative z-10 min-h-screen flex items-center px-[var(--margin)]" aria-label="Global reach">
+<section data-section="global-map" class="relative z-10 min-h-screen flex items-center page-x" aria-label="Global reach">
   <div class="w-full">
     <p class="mono text-text-mono mb-4">VI · Global reach</p>
     <h2 class="display-md font-display tracking-[-0.02em] mb-12">Engineered in Cyprus.<br/><span class="serif-italic">Carried worldwide.</span></h2>

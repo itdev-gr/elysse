@@ -1,22 +1,22 @@
 :root {
-  /* Surfaces */
-  --surface-deep: #0a1410;
-  --surface-relief: #0d1f16;
-  --surface-break: #f2ede3;
+  /* Surfaces — warm cream canvas */
+  --surface-deep: #f6f4ec;
+  --surface-relief: #ecebe1;
+  --surface-break: #0c1a14;
 
-  /* Text */
-  --text-primary: #f2ede3;
-  --text-secondary: #a8c4b2;
-  --text-mono: #7eb08c;
+  /* Text — deep forest on cream */
+  --text-primary: #0c1a14;
+  --text-secondary: #3d5a48;
+  --text-mono: #2d5540;
 
-  /* Accents */
-  --accent-bright: #aee4be;
-  --accent-primary: #7eb08c;
-  --accent-deep: #3d6b52;
-  --accent-water: #6fb8c2;
+  /* Accents — green hierarchy */
+  --accent-bright: #1a3d2a;
+  --accent-primary: #3d6b52;
+  --accent-deep: #0f2a1d;
+  --accent-water: #24545a;
 
   /* Utility */
-  --hairline: rgba(242, 237, 227, 0.12);
+  --hairline: rgba(12, 26, 20, 0.14);
 
   /* Type */
   --font-display: 'Fraunces', Georgia, serif;
@@ -37,6 +37,14 @@
 @media (max-width: 767px)  { :root { --margin: 24px; --gutter: 16px; } }
 
 html { background: var(--surface-deep); color: var(--text-primary); }
+
+/* Page-level horizontal padding (responsive to --margin token). */
+.page-x { padding-left: var(--margin); padding-right: var(--margin); }
+.page-l { padding-left: var(--margin); }
+.page-r { padding-right: var(--margin); }
+.page-pin-l { left: var(--margin); }
+.page-pin-r { right: var(--margin); }
+.page-w { width: var(--margin); }
 
 :focus-visible {
   outline: 2px solid var(--accent-bright);

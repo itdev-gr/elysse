@@ -11,10 +11,10 @@ export function initManifesto() {
     end: '+=150%',
     pin: true,
     scrub: 0.8,
-    onEnter:       () => gsap.to(wrap,  { backgroundColor: '#f2ede3', color: '#0a1410', duration: 0.6 }),
-    onLeave:       () => gsap.to(wrap,  { backgroundColor: '#0a1410', color: '#f2ede3', duration: 0.6 }),
-    onEnterBack:   () => gsap.to(wrap,  { backgroundColor: '#f2ede3', color: '#0a1410', duration: 0.6 }),
-    onLeaveBack:   () => gsap.to(wrap,  { backgroundColor: '#0a1410', color: '#f2ede3', duration: 0.6 }),
+    onEnter:       () => gsap.to(wrap,  { backgroundColor: '#0c1a14', color: '#f6f4ec', duration: 0.6 }),
+    onLeave:       () => gsap.to(wrap,  { backgroundColor: '#f6f4ec', color: '#0c1a14', duration: 0.6 }),
+    onEnterBack:   () => gsap.to(wrap,  { backgroundColor: '#0c1a14', color: '#f6f4ec', duration: 0.6 }),
+    onLeaveBack:   () => gsap.to(wrap,  { backgroundColor: '#f6f4ec', color: '#0c1a14', duration: 0.6 }),
     animation: gsap.timeline()
       .to('[data-mword]', { opacity: 1, stagger: { amount: 1 } }, 0)
       .to('[data-manifesto-wave]', { strokeDashoffset: 0, duration: 1, ease: 'none' }, 0)
