@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+const sectors = await getCollection('sectors');
+const order = ['agriculture', 'landscape', 'building', 'industry'];
+const ordered = order.map(slug => sectors.find(s => s.slug === slug)!);
+
+const presetMap: Record<string, string> = {
+  agriculture: 'agri',
+  landscape: 'landscape',
+  building: 'building',
+  industry: 'industry',
+};
+---
+<section data-section="four-worlds" class="relative z-10" aria-label="Four sectors Elysee serves">
+  <div data-worlds-pin class="relative h-screen overflow-hidden">
+    <header class="pointer-events-none absolute top-0 left-0 right-0 px-[var(--margin)] pt-12 z-20">
+      <p class="mono text-text-mono mb-4">III · Four worlds, one flow</p>
+      <h2 class="display-lg font-display font-medium tracking-[-0.02em] max-w-[20ch]">Four worlds,<br /><span class="serif-italic">one flow.</span></h2>
+    </header>
+
+    <div data-worlds-track class="absolute inset-0 flex">
+      {ordered.map((sector, i) => (
+        <article
+          data-world-panel
+          data-preset={presetMap[sector.slug]}
+          class="flex-shrink-0 w-screen h-screen relative px-[var(--margin)] flex items-end pb-24"
+        >
+          <div class="grid grid-cols-12 gap-6 w-full">
+            <div class="col-span-7">
+              <p class="mono text-accent-bright mb-3">0{i + 1} / 04</p>
+              <h3 class="font-display leading-[0.88] tracking-[-0.025em]" style="font-size: clamp(80px, 15vw, 220px);">{sector.data.name}</h3>
+              <p class="mono text-text-secondary mt-4 max-w-md">{sector.data.tagline}</p>
+              <ul class="mt-6 flex flex-wrap gap-2">
+                {sector.data.bullets.map((b: string) => (
+                  <li class="mono border border-hairline rounded-full px-3 py-2 text-text-mono">{b}</li>
+                ))}
+              </ul>
+            </div>
+            <div class="col-span-5 relative">
+              <div class="aspect-[3/4] w-full overflow-hidden" style="clip-path: polygon(0 0, 100% 6%, 94% 100%, 0 94%);">
+                <img src={sector.data.image} alt={sector.data.name} class="w-full h-full object-cover" loading="lazy" />
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="pointer-events-none absolute bottom-8 left-[var(--margin)] right-[var(--margin)] flex gap-2 z-20">
+      {ordered.map(() => <span data-worlds-tick class="h-px flex-1 bg-hairline origin-left scale-x-100"></span>)}
+    </div>
+  </div>
+</section>

@@ -3,15 +3,18 @@ import Base from '~/layouts/Base.astro';
 import ParticleFlow from '~/components/hero/ParticleFlow.astro';
 import Hero from '~/components/sections/Hero.astro';
 import Manifesto from '~/components/sections/Manifesto.astro';
+import FourWorlds from '~/components/sections/FourWorlds.astro';
 ---
 <Base title="Elysee Irrigation — Streaming water, streaming life">
   <ParticleFlow />
   <Hero />
   <Manifesto />
+  <FourWorlds />
 
   <script>
     import { playHero } from '~/scripts/motion/timelines/hero';
     import { initManifesto } from '~/scripts/motion/timelines/manifesto';
+    import { initFourWorlds } from '~/scripts/motion/timelines/fourWorlds';
     import { prefersReducedMotion } from '~/scripts/utils/reducedMotion';
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -22,6 +25,7 @@ import Manifesto from '~/components/sections/Manifesto.astro';
       }
       playHero();
       initManifesto();
+      initFourWorlds();
     });
   </script>
 </Base>
