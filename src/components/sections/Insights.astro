@@ -15,7 +15,7 @@ const insights = (await getCollection('insights')).sort((a, b) => b.data.date.ge
     {insights.map(it => (
       <article role="listitem" class="flex-shrink-0 w-[min(520px,80vw)] group">
         <div class="aspect-[4/3] overflow-hidden rounded-md bg-surface-relief">
-          <img src={it.data.cover} alt={it.data.title} class="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]" loading="lazy" />
+          <img src={it.data.cover} alt={it.data.title} class="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]" width="1200" height="900" loading="lazy" />
         </div>
         <div class="mt-4 flex items-center gap-3 mono text-text-mono">
           <span>{it.data.tag}</span>
