@@ -4,17 +4,20 @@ import ParticleFlow from '~/components/hero/ParticleFlow.astro';
 import Hero from '~/components/sections/Hero.astro';
 import Manifesto from '~/components/sections/Manifesto.astro';
 import FourWorlds from '~/components/sections/FourWorlds.astro';
+import EpsilonCameo from '~/components/sections/EpsilonCameo.astro';
 ---
 <Base title="Elysee Irrigation — Streaming water, streaming life">
   <ParticleFlow />
   <Hero />
   <Manifesto />
   <FourWorlds />
+  <EpsilonCameo />
 
   <script>
     import { playHero } from '~/scripts/motion/timelines/hero';
     import { initManifesto } from '~/scripts/motion/timelines/manifesto';
     import { initFourWorlds } from '~/scripts/motion/timelines/fourWorlds';
+    import { initEpsilonCameo } from '~/scripts/motion/timelines/epsilonCameo';
     import { prefersReducedMotion } from '~/scripts/utils/reducedMotion';
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -26,6 +29,7 @@ import FourWorlds from '~/components/sections/FourWorlds.astro';
       playHero();
       initManifesto();
       initFourWorlds();
+      initEpsilonCameo();
     });
   </script>
 </Base>
