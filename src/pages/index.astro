@@ -9,8 +9,30 @@ import Counters from '~/components/sections/Counters.astro';
 import GlobalMap from '~/components/sections/GlobalMap.astro';
 import Insights from '~/components/sections/Insights.astro';
 import ContactFooter from '~/components/sections/ContactFooter.astro';
+
+const org = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Elysee Irrigation Ltd.',
+  url: 'https://elysee.com.cy',
+  logo: 'https://elysee.com.cy/og/logo.png',
+  foundingDate: '1979',
+  sameAs: [
+    'https://www.linkedin.com/company/elysee-irrigation-ltd',
+    'https://www.facebook.com/ElyseeIrrigation',
+    'https://twitter.com/ELYSEECY'
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '5 Pentadaktylou Street',
+    addressLocality: 'Ergates',
+    addressRegion: 'Nicosia',
+    postalCode: '2643',
+    addressCountry: 'CY'
+  }
+};
 ---
-<Base title="Elysee Irrigation — Streaming water, streaming life">
+<Base title="Elysee Irrigation — Streaming water, streaming life" jsonLd={org}>
   <ParticleFlow />
   <Hero />
   <Manifesto />

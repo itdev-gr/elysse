@@ -8,8 +8,18 @@ import { getEntry, getCollection } from 'astro:content';
 const epsilon = await getEntry('products', 'epsilon');
 if (!epsilon) throw new Error('Epsilon product not found');
 const related = (await getCollection('products')).filter(p => p.data.category === epsilon.data.category && p.slug !== 'epsilon').slice(0, 4);
+
+const productLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: epsilon.data.name,
+  description: epsilon.data.blurb,
+  brand: { '@type': 'Brand', name: 'Elysee Irrigation' },
+  category: 'Compression Fittings',
+  image: new URL(epsilon.data.image, Astro.site).href
+};
 ---
-<Base title="Epsilon Series — Elysee Irrigation" description={epsilon.data.blurb}>
+<Base title="Epsilon Series — Elysee Irrigation" description={epsilon.data.blurb} jsonLd={productLd}>
   <ParticleFlow />
 
   <section data-section="e1-reveal" class="relative z-10 min-h-screen flex items-center justify-center px-[var(--margin)]">

@@ -4,8 +4,9 @@ interface Props {
   description?: string;
   ogImage?: string;
   canonical?: string;
+  jsonLd?: Record<string, any>;
 }
-const { title, description = 'Streaming water. Streaming life.', ogImage = '/og/default.jpg', canonical } = Astro.props;
+const { title, description = 'Streaming water. Streaming life.', ogImage = '/og/default.jpg', canonical, jsonLd } = Astro.props;
 const canonicalURL = canonical ?? new URL(Astro.url.pathname, Astro.site).href;
 ---
 <meta charset="UTF-8" />
@@ -24,3 +25,5 @@ const canonicalURL = canonical ?? new URL(Astro.url.pathname, Astro.site).href;
 <meta property="og:image" content={new URL(ogImage, Astro.site).href} />
 <meta property="og:url" content={canonicalURL} />
 <meta name="twitter:card" content="summary_large_image" />
+
+{jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}

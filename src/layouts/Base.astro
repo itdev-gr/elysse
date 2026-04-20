@@ -8,12 +8,13 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  jsonLd?: Record<string, any>;
 }
-const { title, description, ogImage } = Astro.props;
+const { title, description, ogImage, jsonLd } = Astro.props;
 ---
 <html lang="en">
   <head>
-    <Meta title={title} description={description} ogImage={ogImage} />
+    <Meta title={title} description={description} ogImage={ogImage} jsonLd={jsonLd} />
   </head>
   <body class="bg-surface-deep text-text-primary min-h-screen">
     <Cursor />
