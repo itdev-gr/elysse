@@ -1,0 +1,10 @@
+---
+interface Props { tone?: 'neutral' | 'bright' | 'subtle'; class?: string }
+const { tone = 'neutral', class: className = '' } = Astro.props;
+const tones = {
+  neutral: 'text-text-mono',
+  bright: 'text-accent-bright',
+  subtle: 'text-text-secondary opacity-70'
+};
+---
+<span class:list={['mono', tones[tone], className]}><slot /></span>

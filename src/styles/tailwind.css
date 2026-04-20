@@ -14,6 +14,7 @@
   --color-accent-primary: #7eb08c;
   --color-accent-deep: #3d6b52;
   --color-accent-water: #6fb8c2;
+  --color-hairline: rgba(242, 237, 227, 0.12);
   --font-display: 'Fraunces', Georgia, serif;
   --font-body: 'Inter Tight', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;

@@ -1,0 +1,10 @@
+---
+interface Props { speed?: number; class?: string }
+const { speed = 40, class: className = '' } = Astro.props;
+---
+<div class:list={['overflow-hidden whitespace-nowrap', className]} data-marquee data-speed={speed}>
+  <div class="inline-block will-change-transform" data-marquee-track>
+    <slot />
+    <slot />
+  </div>
+</div>

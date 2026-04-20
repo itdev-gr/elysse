@@ -1,0 +1,32 @@
+---
+import { navLinks } from '~/data/nav';
+import Button from './Button.astro';
+---
+<nav data-nav class="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between px-6 md:px-12">
+  <a href="/" class="font-display text-xl">Elysee</a>
+  <ul class="hidden md:flex items-center gap-8 font-mono text-[11px] uppercase tracking-[0.18em] text-text-secondary">
+    {navLinks.map(link => (
+      <li><a href={link.href} class="transition-colors hover:text-accent-bright">{link.label}</a></li>
+    ))}
+  </ul>
+  <Button href="/#contact" class="hidden md:inline-flex">Get in touch</Button>
+  <button data-nav-toggle class="md:hidden text-accent-bright" aria-label="Open menu">☰</button>
+</nav>
+
+<script>
+  const nav = document.querySelector('[data-nav]') as HTMLElement | null;
+  if (nav) {
+    let last = 0;
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (y > last && y > 80) nav.style.transform = 'translateY(-100%)';
+      else nav.style.transform = 'translateY(0)';
+      last = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>
+
+<style>
+  nav { transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1); }
+</style>

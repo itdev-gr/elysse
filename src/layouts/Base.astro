@@ -1,0 +1,21 @@
+---
+import '~/styles/tailwind.css';
+import Meta from '~/components/ui/Meta.astro';
+import Nav from '~/components/ui/Nav.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+const { title, description, ogImage } = Astro.props;
+---
+<html lang="en">
+  <head>
+    <Meta title={title} description={description} ogImage={ogImage} />
+  </head>
+  <body class="bg-surface-deep text-text-primary min-h-screen">
+    <Nav />
+    <main><slot /></main>
+  </body>
+</html>

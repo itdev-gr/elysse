@@ -1,0 +1,24 @@
+---
+interface Props {
+  variant?: 'primary' | 'arrow';
+  href?: string;
+  class?: string;
+}
+const { variant = 'primary', href, class: className = '' } = Astro.props;
+const Tag = href ? 'a' : 'button';
+---
+{variant === 'primary' && (
+  <Tag
+    href={href}
+    class:list={['group relative inline-flex items-center overflow-hidden rounded-full border border-accent-primary px-6 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-accent-bright transition-colors hover:text-surface-deep', className]}
+  >
+    <span class="absolute inset-0 origin-bottom scale-y-0 bg-accent-bright transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-y-100" />
+    <span class="relative"><slot /></span>
+  </Tag>
+)}
+{variant === 'arrow' && (
+  <Tag href={href} class:list={['group inline-flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-text-primary', className]}>
+    <span><slot /></span>
+    <span class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-hairline transition-transform duration-500 group-hover:rotate-45 group-hover:border-accent-bright">→</span>
+  </Tag>
+)}
