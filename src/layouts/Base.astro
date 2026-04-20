@@ -2,7 +2,6 @@
 import '~/styles/tailwind.css';
 import Meta from '~/components/ui/Meta.astro';
 import Nav from '~/components/ui/Nav.astro';
-import Cursor from '~/components/ui/Cursor.astro';
 
 interface Props {
   title: string;
@@ -18,7 +17,6 @@ const { title, description, ogImage, jsonLd } = Astro.props;
   </head>
   <body class="bg-surface-deep text-text-primary min-h-screen">
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[70] focus:bg-surface-break focus:text-surface-deep focus:px-4 focus:py-2 focus:rounded">Skip to content</a>
-    <Cursor />
     <Nav />
     <main id="main"><slot /></main>
     <script>
