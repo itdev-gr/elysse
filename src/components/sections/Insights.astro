@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 const insights = (await getCollection('insights')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
-<section data-section="insights" id="insights" class="relative z-10 min-h-[80vh] py-24" aria-label="Latest insights">
+<section data-section="insights" id="insights" class="relative z-10 min-h-[80vh] py-24 overflow-hidden" aria-label="Latest insights">
   <header class="page-x mb-10 flex items-end justify-between">
     <div>
       <p class="mono text-text-mono mb-3">VII · Insights</p>
