@@ -1,0 +1,11 @@
+---
+import SplitHeadline from '~/components/hero/SplitHeadline.astro';
+---
+<section data-section="hero" class="relative z-10 min-h-screen flex flex-col justify-center px-[var(--margin)] pb-24">
+  <p class="mono mb-8 opacity-0 translate-y-3">Elysee · since 1979 · 65 countries</p>
+  <SplitHeadline text="The flow of growth." emphasisWords={['of', 'flow']} />
+  <div class="absolute bottom-10 right-[var(--margin)] flex items-center gap-4 text-text-secondary mono">
+    <span>scroll</span>
+    <span class="block h-14 w-px origin-top bg-text-mono" data-hero-scrollhint></span>
+  </div>
+</section>

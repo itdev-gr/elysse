@@ -1,10 +1,21 @@
 ---
 import Base from '~/layouts/Base.astro';
 import ParticleFlow from '~/components/hero/ParticleFlow.astro';
+import Hero from '~/components/sections/Hero.astro';
 ---
 <Base title="Elysee Irrigation — Streaming water, streaming life">
   <ParticleFlow />
-  <section class="relative z-10 min-h-screen flex items-center justify-center">
-    <h1 class="display-xl">The flow <span class="serif-italic">of growth</span>.</h1>
-  </section>
+  <Hero />
+
+  <script>
+    import { playHero } from '~/scripts/motion/timelines/hero';
+    import { prefersReducedMotion } from '~/scripts/utils/reducedMotion';
+    if (!prefersReducedMotion()) {
+      window.addEventListener('DOMContentLoaded', () => playHero());
+    } else {
+      // Instant reveal for reduced motion
+      document.querySelectorAll('[data-section="hero"] [data-word]').forEach(el => (el as HTMLElement).style.transform = 'translateY(0)');
+      document.querySelectorAll('[data-section="hero"] .mono').forEach(el => { (el as HTMLElement).style.opacity = '1'; (el as HTMLElement).style.transform = 'none'; });
+    }
+  </script>
 </Base>
