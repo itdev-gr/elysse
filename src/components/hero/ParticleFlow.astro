@@ -1,0 +1,23 @@
+---
+// Renders a container div + hydrates the canvas client-side (idle).
+---
+<div id="particle-flow-root" aria-hidden="true"></div>
+
+<script>
+  import { createParticleFlow } from '~/scripts/motion/particleFlow';
+
+  const start = () => {
+    const host = document.getElementById('particle-flow-root');
+    if (!host) return;
+    const flow = createParticleFlow(host);
+    if (flow) {
+      (window as any).__flow = flow;
+    }
+  };
+
+  if ('requestIdleCallback' in window) {
+    (window as any).requestIdleCallback(start, { timeout: 2000 });
+  } else {
+    setTimeout(start, 800);
+  }
+</script>
