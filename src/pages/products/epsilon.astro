@@ -1,0 +1,93 @@
+---
+import Base from '~/layouts/Base.astro';
+import ParticleFlow from '~/components/hero/ParticleFlow.astro';
+import EpsilonStage from '~/components/products/EpsilonStage.astro';
+import Button from '~/components/ui/Button.astro';
+import { getEntry, getCollection } from 'astro:content';
+
+const epsilon = await getEntry('products', 'epsilon');
+if (!epsilon) throw new Error('Epsilon product not found');
+const related = (await getCollection('products')).filter(p => p.data.category === epsilon.data.category && p.slug !== 'epsilon').slice(0, 4);
+---
+<Base title="Epsilon Series — Elysee Irrigation" description={epsilon.data.blurb}>
+  <ParticleFlow />
+
+  <section data-section="e1-reveal" class="relative z-10 min-h-screen flex items-center justify-center px-[var(--margin)]">
+    <div class="text-center">
+      <p class="mono text-text-mono mb-6" data-e1-subline>ε · EPSILON SERIES</p>
+      <h1 class="display-xl font-display tracking-[-0.025em] leading-[0.9]" data-e1-title>Compression,<br/><span class="serif-italic">perfected.</span></h1>
+      <p class="mono text-text-secondary mt-8 opacity-0" data-e1-tagline>{epsilon.data.blurb}</p>
+    </div>
+  </section>
+
+  <section data-section="e2-disassembly" class="relative z-10">
+    <div data-e2-pin class="h-screen flex items-center justify-center px-[var(--margin)]">
+      <div class="w-full max-w-5xl aspect-[8/5] relative">
+        <EpsilonStage />
+      </div>
+    </div>
+  </section>
+
+  <section data-section="e3-specs" class="relative z-10 min-h-screen px-[var(--margin)] py-24">
+    <div class="grid grid-cols-12 gap-6">
+      <div class="col-span-12 md:col-span-5">
+        <p class="mono text-text-mono mb-4">III · Specs</p>
+        <h2 class="display-md font-display tracking-[-0.02em]">Built to<br/><span class="serif-italic">standard.</span></h2>
+      </div>
+      <div class="col-span-12 md:col-span-7">
+        <dl class="divide-y divide-hairline" data-e3-list>
+          {epsilon.data.specs.map(s => (
+            <div class="py-4 grid grid-cols-12 gap-4 opacity-0 translate-y-3" data-e3-row>
+              <dt class="col-span-5 mono text-text-mono">{s.key}</dt>
+              <dd class="col-span-7 text-text-primary">{s.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <div class="mt-12 flex flex-wrap gap-3">
+          <Button variant="primary" href={epsilon.data.datasheet ?? '#'}>Datasheet</Button>
+          <Button variant="arrow" href="#">Installation</Button>
+          <Button variant="arrow" href="#">BIM</Button>
+          <Button variant="arrow" href="#">3D CAD</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="e4-install" class="relative z-10 h-screen overflow-hidden">
+    <div data-e4-pin class="h-full flex items-center px-[var(--margin)] gap-6">
+      {[1,2,3,4].map(step => (
+        <figure data-e4-frame data-step={step} class="flex-shrink-0 w-[80vw] md:w-[42vw] aspect-[3/4] rounded-md overflow-hidden bg-surface-relief relative transition-opacity duration-500">
+          <img src={`/images/products/epsilon-hero.jpg`} alt={`Installation step ${step}`} class="w-full h-full object-cover" loading="lazy" />
+          <figcaption class="absolute bottom-0 left-0 right-0 p-6">
+            <p class="mono text-accent-bright">STEP 0{step}</p>
+            <p class="mono text-text-secondary mt-1">Installation phase {step} placeholder caption.</p>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <section data-section="e5-related" class="relative z-10 min-h-screen px-[var(--margin)] py-24">
+    <header class="mb-12">
+      <p class="mono text-text-mono mb-3">V · Compatible</p>
+      <h2 class="display-md font-display tracking-[-0.02em]">Works with<span class="serif-italic">.</span></h2>
+    </header>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {related.map(r => (
+        <a href={`/products/${r.slug}`} class="group block">
+          <div class="aspect-[4/5] overflow-hidden rounded-md bg-surface-relief"><img src={r.data.image} alt={r.data.name} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" /></div>
+          <p class="mono text-text-mono mt-3">{r.data.category.replace(/-/g, ' ')}</p>
+          <h3 class="font-display text-xl mt-1">{r.data.name}</h3>
+        </a>
+      ))}
+    </div>
+    <div class="mt-24 text-center">
+      <a href="/#contact" class="inline-block display-sm font-display tracking-[-0.02em] hover:text-accent-bright transition-colors">Talk to our engineers <span class="serif-italic">→</span></a>
+    </div>
+  </section>
+
+  <script>
+    import { initEpsilonPage } from '~/scripts/motion/timelines/epsilonPage';
+    window.addEventListener('DOMContentLoaded', () => initEpsilonPage());
+  </script>
+</Base>
