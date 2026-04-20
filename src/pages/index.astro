@@ -6,6 +6,7 @@ import Manifesto from '~/components/sections/Manifesto.astro';
 import FourWorlds from '~/components/sections/FourWorlds.astro';
 import EpsilonCameo from '~/components/sections/EpsilonCameo.astro';
 import Counters from '~/components/sections/Counters.astro';
+import GlobalMap from '~/components/sections/GlobalMap.astro';
 ---
 <Base title="Elysee Irrigation — Streaming water, streaming life">
   <ParticleFlow />
@@ -14,6 +15,7 @@ import Counters from '~/components/sections/Counters.astro';
   <FourWorlds />
   <EpsilonCameo />
   <Counters />
+  <GlobalMap />
 
   <script>
     import { playHero } from '~/scripts/motion/timelines/hero';
@@ -21,6 +23,7 @@ import Counters from '~/components/sections/Counters.astro';
     import { initFourWorlds } from '~/scripts/motion/timelines/fourWorlds';
     import { initEpsilonCameo } from '~/scripts/motion/timelines/epsilonCameo';
     import { initCounters } from '~/scripts/motion/timelines/counters';
+    import { initGlobalMap } from '~/scripts/motion/timelines/globalMap';
     import { prefersReducedMotion } from '~/scripts/utils/reducedMotion';
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -38,6 +41,7 @@ import Counters from '~/components/sections/Counters.astro';
       initFourWorlds();
       initEpsilonCameo();
       initCounters();
+      initGlobalMap();
     });
   </script>
 </Base>

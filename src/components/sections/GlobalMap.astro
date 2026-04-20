@@ -1,0 +1,41 @@
+---
+import { hq, markets } from '~/data/globalMap';
+
+// Equirectangular projection: lon [-180,180] -> x [0, 1200], lat [90,-90] -> y [0, 600]
+function project(lng: number, lat: number) {
+  const x = (lng + 180) / 360 * 1200;
+  const y = (90 - lat) / 180 * 600;
+  return [x, y] as const;
+}
+
+const [hqX, hqY] = project(hq.lng, hq.lat);
+const lines = markets.map(m => {
+  const [x, y] = project(m.lng, m.lat);
+  // Quadratic control for a gentle arc
+  const mx = (hqX + x) / 2;
+  const my = Math.min(hqY, y) - 40;
+  return { path: `M ${hqX} ${hqY} Q ${mx} ${my} ${x} ${y}`, end: [x, y] as const, label: m.label, primary: !!m.primary };
+});
+---
+<section data-section="global-map" class="relative z-10 min-h-screen flex items-center px-[var(--margin)]" aria-label="Global reach">
+  <div class="w-full">
+    <p class="mono text-text-mono mb-4">VI · Global reach</p>
+    <h2 class="display-md font-display tracking-[-0.02em] mb-12">Engineered in Cyprus.<br/><span class="serif-italic">Carried worldwide.</span></h2>
+    <div class="relative aspect-[2/1] w-full rounded-md overflow-hidden border border-hairline" style="background: linear-gradient(135deg, #0d1f16 0%, #0a1410 100%);">
+      <svg viewBox="0 0 1200 600" class="absolute inset-0 w-full h-full">
+        <circle cx={hqX} cy={hqY} r="5" fill="#aee4be" />
+        <circle cx={hqX} cy={hqY} r="14" fill="none" stroke="#aee4be" stroke-width="0.8" opacity="0.5">
+          <animate attributeName="r" values="8;22;8" dur="3s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite" />
+        </circle>
+        {lines.map((l, i) => (
+          <g>
+            <path data-map-line d={l.path} stroke={l.primary ? '#aee4be' : '#7eb08c'} stroke-width={l.primary ? '1.5' : '1'} fill="none" stroke-dasharray="2000" stroke-dashoffset="2000" opacity={l.primary ? '0.9' : '0.5'} />
+            <circle data-map-dot data-index={i} cx={l.end[0]} cy={l.end[1]} r="3" fill={l.primary ? '#aee4be' : '#7eb08c'} opacity="0" />
+          </g>
+        ))}
+      </svg>
+    </div>
+    <p class="mono text-text-mono mt-6">HQ CYPRUS · EGYPT · GERMANY · SPAIN · MOROCCO · CROATIA · KENYA · SAUDI ARABIA</p>
+  </div>
+</section>
