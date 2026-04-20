@@ -17,5 +17,9 @@ const { title, description, ogImage } = Astro.props;
   <body class="bg-surface-deep text-text-primary min-h-screen">
     <Nav />
     <main><slot /></main>
+    <script>
+      import { initLenis } from '~/scripts/motion/lenis';
+      initLenis();
+    </script>
   </body>
 </html>
