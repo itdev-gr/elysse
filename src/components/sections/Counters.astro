@@ -1,0 +1,20 @@
+---
+import { companyStats } from '~/data/stats';
+const items = [
+  { target: companyStats.yearsActive, suffix: '',  label: 'Years active',    caption: 'Since 1979' },
+  { target: companyStats.productCodes, suffix: '+', label: 'Product codes',  caption: 'Across 4 sectors' },
+  { target: companyStats.countries,    suffix: '',  label: 'Countries',      caption: 'HQ Cyprus · factories EG · DE' }
+];
+---
+<section data-section="counters" class="relative z-10 min-h-screen flex items-center px-[var(--margin)]" aria-label="Elysee by the numbers">
+  <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
+    {items.map((it, i) => (
+      <div>
+        <p class="mono text-text-mono mb-4">0{i + 1}</p>
+        <p class="display-lg font-display tracking-[-0.02em] leading-none" data-counter data-target={it.target} data-suffix={it.suffix}>0</p>
+        <p class="mt-6 text-text-primary">{it.label}</p>
+        <p class="mono text-text-mono mt-2">{it.caption}</p>
+      </div>
+    ))}
+  </div>
+</section>
