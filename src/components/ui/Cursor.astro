@@ -1,0 +1,48 @@
+---
+---
+<div data-cursor class="pointer-events-none fixed z-[60] top-0 left-0 h-2 w-2 rounded-full bg-accent-bright mix-blend-difference transition-[width,height,border-width] duration-200 ease-out" style="transform: translate3d(-50%, -50%, 0)"></div>
+
+<script>
+  import { hasFinePointer } from '~/scripts/utils/prefersPointer';
+  import { prefersReducedMotion } from '~/scripts/utils/reducedMotion';
+
+  if (hasFinePointer() && !prefersReducedMotion()) {
+    const cursor = document.querySelector('[data-cursor]') as HTMLElement | null;
+    if (cursor) {
+      let x = window.innerWidth / 2, y = window.innerHeight / 2;
+      let tx = x, ty = y;
+      window.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
+      const loop = () => {
+        x += (tx - x) * 0.22;
+        y += (ty - y) * 0.22;
+        cursor.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+        requestAnimationFrame(loop);
+      };
+      loop();
+
+      const interactive = 'a, button, [data-cursor-hover]';
+      document.addEventListener('mouseover', (e) => {
+        if ((e.target as HTMLElement).closest(interactive)) {
+          cursor.style.width = '32px';
+          cursor.style.height = '32px';
+          cursor.style.backgroundColor = 'transparent';
+          cursor.style.border = '1px solid #aee4be';
+        }
+      });
+      document.addEventListener('mouseout', (e) => {
+        if ((e.target as HTMLElement).closest(interactive)) {
+          cursor.style.width = '8px';
+          cursor.style.height = '8px';
+          cursor.style.backgroundColor = '#aee4be';
+          cursor.style.border = '0';
+        }
+      });
+    }
+  } else {
+    document.querySelector('[data-cursor]')?.remove();
+  }
+</script>
+
+<style is:global>
+  @media (pointer: fine) { html { cursor: none; } a, button { cursor: none; } }
+</style>

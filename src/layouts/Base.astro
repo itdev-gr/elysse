@@ -2,6 +2,7 @@
 import '~/styles/tailwind.css';
 import Meta from '~/components/ui/Meta.astro';
 import Nav from '~/components/ui/Nav.astro';
+import Cursor from '~/components/ui/Cursor.astro';
 
 interface Props {
   title: string;
@@ -15,6 +16,7 @@ const { title, description, ogImage } = Astro.props;
     <Meta title={title} description={description} ogImage={ogImage} />
   </head>
   <body class="bg-surface-deep text-text-primary min-h-screen">
+    <Cursor />
     <Nav />
     <main><slot /></main>
     <script>
