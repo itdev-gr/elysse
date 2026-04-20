@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+const insights = (await getCollection('insights')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+<section data-section="insights" id="insights" class="relative z-10 min-h-[80vh] py-24" aria-label="Latest insights">
+  <header class="px-[var(--margin)] mb-10 flex items-end justify-between">
+    <div>
+      <p class="mono text-text-mono mb-3">VII · Insights</p>
+      <h2 class="display-md font-display tracking-[-0.02em]">Latest <span class="serif-italic">signals.</span></h2>
+    </div>
+    <a href="#" class="mono text-text-mono hover:text-accent-bright">View all →</a>
+  </header>
+
+  <div data-insights-track class="flex gap-8 overflow-x-auto scroll-smooth cursor-grab pl-[var(--margin)]" role="list">
+    {insights.map(it => (
+      <article role="listitem" class="flex-shrink-0 w-[min(520px,80vw)] group">
+        <div class="aspect-[4/3] overflow-hidden rounded-md bg-surface-relief">
+          <img src={it.data.cover} alt={it.data.title} class="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]" loading="lazy" />
+        </div>
+        <div class="mt-4 flex items-center gap-3 mono text-text-mono">
+          <span>{it.data.tag}</span>
+          <span class="h-px flex-1 bg-hairline"></span>
+          <time datetime={it.data.date.toISOString()}>{it.data.date.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}</time>
+        </div>
+        <h3 class="mt-3 font-display text-2xl leading-tight">{it.data.title}</h3>
+        <p class="mt-2 text-text-secondary max-w-md">{it.data.excerpt}</p>
+      </article>
+    ))}
+    <div class="flex-shrink-0 w-[var(--margin)]"></div>
+  </div>
+</section>
