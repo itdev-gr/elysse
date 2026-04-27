@@ -178,7 +178,7 @@ Add to frontmatter:
 code: NO330D
 sectors: [building, industry]
 material: PVC-U flange / EPDM gasket
-dnRange: [50, 315]
+dnRange: [50, 160]
 pnRating: 16
 standards: [EN 1452, DIN 8061]
 imageUrls:
@@ -227,15 +227,15 @@ Add to frontmatter:
 
 ```yaml
 code: NO550V
-sectors: [agriculture, landscape]
-material: PP saddle / EPDM gasket / stainless bolts
-dnRange: [63, 315]
-pnRating: 16
-standards: [ISO 8085]
+sectors: [building, industry]
+material: Ductile iron flange / EPDM gasket / steel bolts
+dnRange: [110, 315]
+pnRating: 10
+standards: [EN 1092-1]
 imageUrls:
   - https://elysee.com.cy/portal-img/default/246/no550v-c-single-4-bolts-1.jpg
 installation: |
-  Drill the main pipe to the saddle's outlet diameter. Position saddle, fit gasket, tighten the four bolts evenly in a cross pattern.
+  Align bolt holes between mating flanges. Place the gasket. Hand-tighten the four bolts in a star pattern, then torque progressively to the manufacturer's spec.
 ```
 
 - [ ] **Step 6: Update `double-union-glued.mdx`**
@@ -246,7 +246,7 @@ Add to frontmatter:
 code: NO108F
 sectors: [building, industry]
 material: PVC-U body / EPDM o-rings
-dnRange: [16, 110]
+dnRange: [20, 63]
 pnRating: 16
 standards: [EN 1452]
 imageUrls:
@@ -263,7 +263,7 @@ Add to frontmatter (`# code synthesized` comment in MDX above the field):
 code: PVC-BV-50
 sectors: [building, landscape]
 material: PVC-U body / PTFE seat / EPDM o-ring
-dnRange: [16, 110]
+dnRange: [20, 110]
 pnRating: 16
 standards: [EN 1452, DIN 8061]
 imageUrls:
@@ -280,13 +280,13 @@ Add to frontmatter (`# code synthesized` comment above):
 code: SDL-CL-32
 sectors: [agriculture, landscape, industry]
 material: PP saddle / EPDM gasket / stainless bolts
-dnRange: [32, 200]
-pnRating: 10
+dnRange: [63, 315]
+pnRating: 16
 standards: [ISO 8085]
 imageUrls:
   - /images/products/saddle-clamp.svg
 installation: |
-  Drill main to outlet bore. Center saddle. Tighten bolts evenly to 12 N·m.
+  Drill the main pipe to the saddle's outlet bore. Center the saddle and fit the gasket. Tighten bolts evenly in a cross pattern to the manufacturer's specified torque.
 ```
 
 - [ ] **Step 9: Build to verify all 8 validate**
@@ -2901,15 +2901,16 @@ import { encodeFilters, decodeFilters } from '~/scripts/catalog/url-state';
 import { EMPTY_FILTERS, type CatalogProduct } from '~/scripts/catalog/types';
 
 // Recreate the 8 demo products' minimal shape from the MDX migration data.
+// (Names, codes, dnRange, pnRating, sectors, material, and standards mirror the actual MDX files.)
 const demo: CatalogProduct[] = [
-  { slug: 'epsilon',            name: 'Epsilon Series',      code: 'EPS-PE-001', category: 'compression-fittings', sectors: ['agriculture','landscape'],            material: 'POM body / EPDM seal',                  dnRange: [20, 110], pnRating: 16, standards: ['ISO 17885','WRAS','KIWA'], imageUrls: [], image: '', blurb: '', pressure: '16 bar',  sizeRange: 'Ø20–Ø110', bim: true,  specs: [], featured: true },
-  { slug: 'adaptor-flanged',    name: 'Adaptor Flanged Set', code: 'NO330D',     category: 'adaptor-flanged',        sectors: ['building','industry'],                material: 'PVC-U flange / EPDM gasket',            dnRange: [50, 315], pnRating: 16, standards: ['EN 1452','DIN 8061'],      imageUrls: [], image: '', blurb: '', pressure: '',        sizeRange: '',          bim: false, specs: [], featured: false },
-  { slug: 'coupling-repair',    name: 'Coupling Repair',     code: 'NO331B',     category: 'couplings',              sectors: ['agriculture','building'],             material: 'PP body / EPDM seal',                   dnRange: [20, 110], pnRating: 16, standards: ['ISO 14236'],               imageUrls: [], image: '', blurb: '', pressure: '',        sizeRange: '',          bim: false, specs: [], featured: false },
-  { slug: 'coupling-transition',name: 'Coupling Transition', code: 'NO321D',     category: 'couplings',              sectors: ['agriculture','landscape','building'], material: 'PP body / brass insert / EPDM seal',     dnRange: [20, 63],  pnRating: 16, standards: ['ISO 14236'],               imageUrls: [], image: '', blurb: '', pressure: '',        sizeRange: '',          bim: false, specs: [], featured: false },
-  { slug: 'single-4-bolts',     name: 'Single 4 Bolts',      code: 'NO550V',     category: 'saddles',                sectors: ['agriculture','landscape'],            material: 'PP saddle / EPDM gasket / stainless bolts', dnRange: [63, 315], pnRating: 16, standards: ['ISO 8085'],            imageUrls: [], image: '', blurb: '', pressure: '',        sizeRange: '',          bim: false, specs: [], featured: false },
-  { slug: 'double-union-glued', name: 'Double Union Glued',  code: 'NO108F',     category: 'valves',                 sectors: ['building','industry'],                material: 'PVC-U body / EPDM o-rings',             dnRange: [16, 110], pnRating: 16, standards: ['EN 1452'],                 imageUrls: [], image: '', blurb: '', pressure: '',        sizeRange: '',          bim: false, specs: [], featured: false },
-  { slug: 'pvc-ball-valve',     name: 'PVC Ball Valve',      code: 'PVC-BV-50',  category: 'pvc-ball-valves',        sectors: ['building','landscape'],               material: 'PVC-U body / PTFE seat / EPDM o-ring',  dnRange: [16, 110], pnRating: 16, standards: ['EN 1452','DIN 8061'],      imageUrls: [], image: '', blurb: '', pressure: '',        sizeRange: '',          bim: false, specs: [], featured: false },
-  { slug: 'saddle-clamp',       name: 'Saddle Clamp',        code: 'SDL-CL-32',  category: 'saddles',                sectors: ['agriculture','landscape','industry'], material: 'PP saddle / EPDM gasket / stainless bolts', dnRange: [32, 200], pnRating: 10, standards: ['ISO 8085'],            imageUrls: [], image: '', blurb: '', pressure: '',        sizeRange: '',          bim: false, specs: [], featured: false }
+  { slug: 'epsilon',             name: 'Epsilon Series',           code: 'EPS-PE-001', category: 'compression-fittings', sectors: ['agriculture','landscape'],            material: 'POM body / EPDM seal',                       dnRange: [20, 110],  pnRating: 16, standards: ['ISO 17885','WRAS','KIWA'], imageUrls: [], image: '', blurb: '', pressure: '16 bar',  sizeRange: 'Ø20–Ø110',  bim: true,  specs: [], featured: true  },
+  { slug: 'adaptor-flanged',     name: 'Adaptor Flanged Set',      code: 'NO330D',     category: 'adaptor-flanged',      sectors: ['building','industry'],                material: 'PVC-U flange / EPDM gasket',                 dnRange: [50, 160],  pnRating: 16, standards: ['EN 1452','DIN 8061'],      imageUrls: [], image: '', blurb: '', pressure: '',        sizeRange: '',          bim: false, specs: [], featured: false },
+  { slug: 'coupling-repair',     name: 'Coupling Repair',          code: 'NO331B',     category: 'couplings',            sectors: ['agriculture','building'],             material: 'PP body / EPDM seal',                        dnRange: [20, 110],  pnRating: 16, standards: ['ISO 14236'],               imageUrls: [], image: '', blurb: '', pressure: '',        sizeRange: '',          bim: false, specs: [], featured: false },
+  { slug: 'coupling-transition', name: 'Coupling Global Transition', code: 'NO321D',  category: 'couplings',            sectors: ['agriculture','landscape','building'], material: 'PP body / brass insert / EPDM seal',         dnRange: [20, 63],   pnRating: 16, standards: ['ISO 14236'],               imageUrls: [], image: '', blurb: '', pressure: '',        sizeRange: '',          bim: false, specs: [], featured: false },
+  { slug: 'single-4-bolts',      name: 'Single 4-bolts Flange',    code: 'NO550V',     category: 'adaptor-flanged',      sectors: ['building','industry'],                material: 'Ductile iron flange / EPDM gasket / steel bolts', dnRange: [110, 315], pnRating: 10, standards: ['EN 1092-1'],            imageUrls: [], image: '', blurb: '', pressure: '',        sizeRange: '',          bim: false, specs: [], featured: false },
+  { slug: 'double-union-glued',  name: 'Double Union Glued',       code: 'NO108F',     category: 'valves',               sectors: ['building','industry'],                material: 'PVC-U body / EPDM o-rings',                  dnRange: [20, 63],   pnRating: 16, standards: ['EN 1452'],                 imageUrls: [], image: '', blurb: '', pressure: '',        sizeRange: '',          bim: false, specs: [], featured: false },
+  { slug: 'pvc-ball-valve',      name: 'PVC Ball Valve',           code: 'PVC-BV-50',  category: 'pvc-ball-valves',      sectors: ['building','landscape'],               material: 'PVC-U body / PTFE seat / EPDM o-ring',       dnRange: [20, 110],  pnRating: 16, standards: ['EN 1452','DIN 8061'],      imageUrls: [], image: '', blurb: '', pressure: '',        sizeRange: '',          bim: false, specs: [], featured: false },
+  { slug: 'saddle-clamp',        name: 'Saddle Clamp',             code: 'SDL-CL-32',  category: 'saddles',              sectors: ['agriculture','landscape','industry'], material: 'PP saddle / EPDM gasket / stainless bolts',  dnRange: [63, 315],  pnRating: 16, standards: ['ISO 8085'],                imageUrls: [], image: '', blurb: '', pressure: '',        sizeRange: '',          bim: false, specs: [], featured: false }
 ];
 
 describe('catalog integration', () => {
@@ -2918,11 +2919,11 @@ describe('catalog integration', () => {
   });
   it('agriculture filter keeps the agricultural products', () => {
     const out = applyFilters(demo, { ...EMPTY_FILTERS, sectors: ['agriculture'] });
-    expect(out.map(p => p.slug).sort()).toEqual(['coupling-repair','coupling-transition','epsilon','saddle-clamp','single-4-bolts']);
+    expect(out.map(p => p.slug).sort()).toEqual(['coupling-repair','coupling-transition','epsilon','saddle-clamp']);
   });
-  it('PN 10 narrows to saddle-clamp only', () => {
+  it('PN 10 narrows to single-4-bolts only', () => {
     const out = applyFilters(demo, { ...EMPTY_FILTERS, pn: [10, 10] });
-    expect(out.map(p => p.slug)).toEqual(['saddle-clamp']);
+    expect(out.map(p => p.slug)).toEqual(['single-4-bolts']);
   });
   it('search by partial code finds adaptor', () => {
     const out = applyFilters(demo, { ...EMPTY_FILTERS, search: 'NO330' });
@@ -2940,7 +2941,7 @@ describe('catalog integration', () => {
   it('sort by name-asc produces alphabetical order', () => {
     const out = sortProducts([...demo], 'name-asc');
     expect(out[0].name).toBe('Adaptor Flanged Set');
-    expect(out[out.length - 1].name).toBe('Single 4 Bolts');
+    expect(out[out.length - 1].name).toBe('Single 4-bolts Flange');
   });
 });
 ```
