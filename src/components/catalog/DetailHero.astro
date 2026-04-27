@@ -1,0 +1,32 @@
+---
+import type { CatalogProduct } from '~/scripts/catalog/types';
+import { formatDN, formatPN } from '~/scripts/catalog/format';
+import KeySpecs from './KeySpecs.astro';
+interface Props { product: CatalogProduct; }
+const { product: p } = Astro.props;
+const main = p.imageUrls[0] ?? p.image;
+---
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-6">
+  <div class="lg:col-span-7">
+    <div class="bg-white border border-[var(--cat-hairline)] rounded-md aspect-square flex items-center justify-center">
+      <img src={main} alt={p.name} width="800" height="800" class="max-w-full max-h-full object-contain p-8" />
+    </div>
+    {p.imageUrls.length > 1 && (
+      <div class="grid grid-cols-5 gap-2 mt-3">
+        {p.imageUrls.slice(0, 5).map(u => <img src={u} alt="" class="bg-white border border-[var(--cat-hairline)] rounded-md aspect-square object-contain p-2" loading="lazy" />)}
+      </div>
+    )}
+  </div>
+  <aside class="lg:col-span-5 lg:sticky lg:top-20 self-start flex flex-col gap-4">
+    {p.code && <p class="cat-mono text-[11px] text-[var(--cat-ink-subtle)]">{p.code}</p>}
+    <h1 class="cat-display text-4xl lg:text-5xl leading-tight">{p.name}</h1>
+    <p class="text-sm text-[var(--cat-ink-muted)]">{p.blurb}</p>
+    <KeySpecs product={p} />
+    <div class="flex flex-col gap-2 mt-2">
+      <button data-add-to-quote data-slug={p.slug} data-name={p.name} data-code={p.code ?? ''} data-thumb={main} class="cat-btn cat-btn--primary">Add to quote</button>
+      {p.datasheet && <a href={p.datasheet} class="cat-btn cat-btn--ghost"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 17v4h16v-4"/></svg>Download datasheet</a>}
+      {p.bim && <a href="https://elysee.partcommunity.com" class="cat-btn cat-btn--ghost">View BIM</a>}
+      {p.slug === 'epsilon' && <a href="/products/epsilon" class="cat-mono text-[11px] text-[var(--cat-accent)] hover:text-[var(--cat-accent-bright)] mt-2">Discover the technology →</a>}
+    </div>
+  </aside>
+</section>
