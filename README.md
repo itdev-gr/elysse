@@ -50,3 +50,13 @@ Fraunces (variable), Inter Tight (variable), JetBrains Mono (variable) — all O
 - Contact form backend
 - Cookie consent
 - About / Green Elysée / Innovation / Insights-detail pages
+
+## Catalog (preview)
+
+A second design direction for the products section, modelled on RS Delivers.
+Lives at `/catalog` and `/catalog/[slug]`. Coexists with the cinematic
+`/products` and `/products/epsilon` pages. See spec at
+`docs/superpowers/specs/2026-04-27-products-rs-catalog-demo-design.md` and plan
+at `docs/superpowers/plans/2026-04-27-products-rs-catalog-demo.md`.
+
+To import an Excel of more products: `node scripts/catalog/import-excel.ts <path-to-xlsx>`.
