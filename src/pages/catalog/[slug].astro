@@ -20,7 +20,8 @@ const p: CatalogProduct = {
   material: entry.data.material, dnRange: entry.data.dnRange, pnRating: entry.data.pnRating, standards: entry.data.standards,
   imageUrls: entry.data.imageUrls, image: entry.data.image, blurb: entry.data.blurb, pressure: entry.data.pressure,
   sizeRange: entry.data.sizeRange, bim: entry.data.bim, datasheet: entry.data.datasheet,
-  installation: entry.data.installation, specs: entry.data.specs, featured: entry.data.featured
+  installation: entry.data.installation, specs: entry.data.specs, featured: entry.data.featured,
+  availableCountries: entry.data.availableCountries
 };
 const related: CatalogProduct[] = all
   .filter(x => x.slug !== p.slug && (x.data.category === p.category || x.data.sectors.some(s => p.sectors.includes(s))))
@@ -30,7 +31,8 @@ const related: CatalogProduct[] = all
     material: c.data.material, dnRange: c.data.dnRange, pnRating: c.data.pnRating, standards: c.data.standards,
     imageUrls: c.data.imageUrls, image: c.data.image, blurb: c.data.blurb, pressure: c.data.pressure,
     sizeRange: c.data.sizeRange, bim: c.data.bim, datasheet: c.data.datasheet, installation: c.data.installation,
-    specs: c.data.specs, featured: c.data.featured
+    specs: c.data.specs, featured: c.data.featured,
+    availableCountries: c.data.availableCountries
   }));
 ---
 <Base title={`${p.name} — Catalog — Elysee Irrigation`} description={p.blurb}>

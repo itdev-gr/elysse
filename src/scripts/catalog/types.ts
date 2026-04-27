@@ -29,6 +29,7 @@ export interface CatalogProduct {
   installation?: string;
   specs: { key: string; value: string }[];
   featured: boolean;
+  availableCountries: Country[];
 }
 
 export interface Filters {

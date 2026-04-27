@@ -30,7 +30,8 @@ const products: CatalogProduct[] = collection.map(c => ({
   datasheet: c.data.datasheet,
   installation: c.data.installation,
   specs: c.data.specs,
-  featured: c.data.featured
+  featured: c.data.featured,
+  availableCountries: c.data.availableCountries
 }));
 
 const facets = deriveFacets(products);

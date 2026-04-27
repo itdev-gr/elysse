@@ -5,6 +5,7 @@ import type { CatalogProduct } from '~/scripts/catalog/types';
 const product = (overrides: Partial<CatalogProduct>): CatalogProduct => ({
   slug: 'x', name: 'X', category: 'valves', sectors: [], standards: [], imageUrls: [],
   image: '', blurb: '', pressure: '', sizeRange: '', bim: false, specs: [], featured: false,
+  availableCountries: ['country-1', 'country-2', 'country-3'],
   ...overrides
 });
 

@@ -22,7 +22,9 @@ const products = defineCollection({
     pnRating: z.number().optional(),
     standards: z.array(z.string()).default([]),
     imageUrls: z.array(z.string()).default([]),
-    installation: z.string().optional()
+    installation: z.string().optional(),
+
+    availableCountries: z.array(z.enum(['country-1', 'country-2', 'country-3'])).nonempty()
   })
 });
 
