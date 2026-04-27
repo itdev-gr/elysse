@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { applyFilters, sortProducts } from '~/scripts/catalog/filter-engine';
+import { applyFilters, byCountry, sortProducts } from '~/scripts/catalog/filter-engine';
 import { deriveFacets } from '~/scripts/catalog/derive-facets';
 import { encodeFilters, decodeFilters } from '~/scripts/catalog/url-state';
 import { EMPTY_FILTERS, type CatalogProduct } from '~/scripts/catalog/types';
@@ -44,5 +44,19 @@ describe('catalog integration', () => {
     const out = sortProducts([...demo], 'name-asc');
     expect(out[0].name).toBe('Adaptor Flanged Set');
     expect(out[out.length - 1].name).toBe('Single 4-bolts Flange');
+  });
+  it('country-3 narrows the demo set to 3 products', () => {
+    const out = byCountry(demo, 'country-3');
+    expect(out.map(p => p.slug).sort()).toEqual(['pvc-ball-valve', 'saddle-clamp', 'single-4-bolts']);
+  });
+  it('facets re-derived from country-3 set reflect only those products', () => {
+    const scoped = byCountry(demo, 'country-3');
+    const f = deriveFacets(scoped);
+    // EN 1452 is on pvc-ball-valve only in this scoped set (saddle has ISO 8085, single-4-bolts has EN 1092-1)
+    const en1452 = f.standards.find(s => s.value === 'EN 1452');
+    expect(en1452?.count).toBe(1);
+    // Categories present in the scoped set: pvc-ball-valves, saddles, adaptor-flanged
+    const cats = f.categories.map(c => c.value).sort();
+    expect(cats).toEqual(['adaptor-flanged', 'pvc-ball-valves', 'saddles']);
   });
 });
