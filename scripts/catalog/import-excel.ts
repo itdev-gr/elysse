@@ -3,9 +3,8 @@
 import { writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import XLSXDefault from 'xlsx';
-// xlsx is a CJS package; when imported as ESM the API lives on the default export
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const XLSX: any = XLSXDefault ?? (XLSXDefault as any)['default'] ?? XLSXDefault;
+// xlsx is a CJS package; under ESM the API lives on the default export.
+const XLSX: any = (XLSXDefault as any).default ?? XLSXDefault;
 
 interface Row {
   code?: string; name?: string; category?: string; sectors?: string;

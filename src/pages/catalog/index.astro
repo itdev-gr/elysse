@@ -35,7 +35,6 @@ const products: CatalogProduct[] = collection.map(c => ({
 
 const facets = deriveFacets(products);
 const productsJson = JSON.stringify(products);
-const facetsJson = JSON.stringify(facets);
 ---
 <Base title="Catalog (preview) — Elysee Irrigation" description="B2B catalog preview. Filter by sector, category, size, pressure, standard.">
   <div class="catalog-scope" data-catalog-root>
@@ -53,7 +52,6 @@ const facetsJson = JSON.stringify(facets);
         </div>
 
       <pre data-products-json style="display:none">{productsJson}</pre>
-      <pre data-facets-json style="display:none">{facetsJson}</pre>
     </section>
   </div>
   <QuoteBasket />

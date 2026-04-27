@@ -18,7 +18,7 @@ export function initCatalogPage() {
   const searchInput = root.querySelector<HTMLInputElement>('[data-catalog-search]');
   const sortSelect = root.querySelector<HTMLSelectElement>('[data-catalog-sort]');
   const activeChips = root.querySelector<HTMLElement>('[data-active-filters]');
-  const clearBtn = root.querySelector<HTMLButtonElement>('[data-clear-filters]');
+  const clearBtns = root.querySelectorAll<HTMLButtonElement>('[data-clear-filters]');
 
   let filters: Filters = { ...decodeFilters(window.location.search.slice(1)) };
   let sort: SortKey = (sortSelect?.value as SortKey) ?? 'relevance';
@@ -56,19 +56,32 @@ export function initCatalogPage() {
     syncUrl();
   }
 
+  function chipLabel(value: string): string {
+    return value.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join(' ');
+  }
+  function escapeHtml(s: string): string {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function chip(key: string, value: string, label: string): string {
+    return `<span class="cat-chip" data-remove-chip data-key="${key}" data-value="${escapeHtml(value)}">${escapeHtml(label)} ×</span>`;
+  }
+  function rangeChip(key: string, label: string): string {
+    return `<span class="cat-chip" data-remove-chip data-key="${key}">${escapeHtml(label)} ×</span>`;
+  }
+
   function renderActiveChips() {
     if (!activeChips) return;
     const chips: string[] = [];
-    filters.sectors.forEach(s => chips.push(`<span class="cat-chip" data-remove-chip data-key="sectors" data-value="${s}">${s} ×</span>`));
-    filters.categories.forEach(c => chips.push(`<span class="cat-chip" data-remove-chip data-key="categories" data-value="${c}">${c} ×</span>`));
-    filters.materials.forEach(m => chips.push(`<span class="cat-chip" data-remove-chip data-key="materials" data-value="${m}">${m} ×</span>`));
-    filters.standards.forEach(s => chips.push(`<span class="cat-chip" data-remove-chip data-key="standards" data-value="${s}">${s} ×</span>`));
-    if (filters.dn)            chips.push(`<span class="cat-chip" data-remove-chip data-key="dn">DN ${filters.dn[0]}–${filters.dn[1]} ×</span>`);
-    if (filters.pn)            chips.push(`<span class="cat-chip" data-remove-chip data-key="pn">PN ${filters.pn[0]}–${filters.pn[1]} ×</span>`);
-    if (filters.hasDatasheet)  chips.push(`<span class="cat-chip" data-remove-chip data-key="hasDatasheet">Datasheet ×</span>`);
-    if (filters.bimAvailable)  chips.push(`<span class="cat-chip" data-remove-chip data-key="bimAvailable">BIM ×</span>`);
+    filters.sectors.forEach(s => chips.push(chip('sectors', s, chipLabel(s))));
+    filters.categories.forEach(c => chips.push(chip('categories', c, chipLabel(c))));
+    filters.materials.forEach(m => chips.push(chip('materials', m, m)));
+    filters.standards.forEach(s => chips.push(chip('standards', s, s)));
+    if (filters.dn)            chips.push(rangeChip('dn', `DN ${filters.dn[0]}–${filters.dn[1]}`));
+    if (filters.pn)            chips.push(rangeChip('pn', `PN ${filters.pn[0]}–${filters.pn[1]}`));
+    if (filters.hasDatasheet)  chips.push(rangeChip('hasDatasheet', 'Datasheet'));
+    if (filters.bimAvailable)  chips.push(rangeChip('bimAvailable', 'BIM'));
     activeChips.innerHTML = chips.join('');
-    if (clearBtn) clearBtn.classList.toggle('hidden', chips.length === 0);
+    clearBtns.forEach(btn => btn.classList.toggle('hidden', chips.length === 0));
   }
 
   function syncUrl() {
@@ -146,12 +159,12 @@ export function initCatalogPage() {
     });
   });
 
-  // Clear all
-  clearBtn?.addEventListener('click', () => {
+  // Clear all (FilterRail + EmptyResults both have a [data-clear-filters] button)
+  clearBtns.forEach(btn => btn.addEventListener('click', () => {
     filters = { ...EMPTY_FILTERS };
     applyUiFromFilters();
     render();
-  });
+  }));
 
   // Active chip remove
   activeChips?.addEventListener('click', (e) => {

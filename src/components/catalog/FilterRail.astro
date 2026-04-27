@@ -11,7 +11,7 @@ const { facets } = Astro.props;
       <span class="cat-display text-lg">Filters</span>
       <button type="button" data-filter-drawer-close class="cat-mono text-xs">✕</button>
     </div>
-    <button type="button" data-clear-filters class="hidden cat-mono text-[11px] text-[var(--cat-accent)] mb-3" data-clear-visibility>Clear all</button>
+    <button type="button" data-clear-filters class="hidden cat-mono text-[11px] text-[var(--cat-accent)] mb-3">Clear all</button>
     <div data-active-filters class="flex flex-wrap gap-1 mb-3"></div>
     <FilterGroup title="Sector" facetKey="sectors" options={facets.sectors} defaultOpen />
     <FilterGroup title="Category" facetKey="categories" options={facets.categories} defaultOpen />
