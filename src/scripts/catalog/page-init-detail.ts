@@ -1,8 +1,31 @@
+import type { Country } from './types';
+import { COUNTRIES } from './types';
 import { getBasket } from './basket-store';
 
-export function initDetailPage() {
+export function initDetailPage(country: Country) {
   const root = document.querySelector<HTMLElement>('[data-catalog-detail]');
   if (!root) return;
+
+  const productCountriesAttr = root.dataset.productCountries ?? '';
+  const productCountries = productCountriesAttr.split(',').filter(Boolean) as Country[];
+  const available = productCountries.includes(country);
+
+  if (!available) {
+    const gate = root.querySelector<HTMLElement>('[data-availability-gate]');
+    if (gate) {
+      const label = COUNTRIES.find(c => c.id === country)?.label ?? country;
+      gate.innerHTML = `
+        <div>
+          <h2 class="cat-display text-2xl">Not available in ${label}</h2>
+          <p class="text-xs text-[var(--cat-ink-muted)] mt-1">This product is sold in other regions. Contact us for cross-region availability.</p>
+        </div>
+        <div class="flex gap-3">
+          <a href="/catalog" class="cat-btn cat-btn--ghost">Back to catalog</a>
+          <a href="/#contact" class="cat-btn cat-btn--primary">Talk to engineering</a>
+        </div>
+      `;
+    }
+  }
 
   // Tabs
   const tabs = root.querySelectorAll<HTMLButtonElement>('[role="tab"]');
@@ -18,7 +41,7 @@ export function initDetailPage() {
     panels.forEach(p => p.classList.toggle('hidden', p.dataset.panel !== target));
   }));
 
-  // Add to quote (any [data-add-to-quote] on the page) — with state subscription
+  // Add to quote — only wires whatever quote buttons remain after the gate replacement
   const basket = getBasket();
   function refreshAddButtons() {
     const items = basket.getItems();

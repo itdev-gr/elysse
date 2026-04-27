@@ -37,7 +37,9 @@ const related: CatalogProduct[] = all
   }));
 ---
 <Base title={`${p.name} — Catalog — Elysee Irrigation`} description={p.blurb}>
-  <div class="catalog-scope" data-catalog-detail>
+  <div class="catalog-scope" data-catalog-detail
+       data-product-slug={p.slug}
+       data-product-countries={p.availableCountries.join(',')}>
     <CountryModal />
     <section class="page-x pt-24 pb-8">
       <nav aria-label="Breadcrumb" class="cat-mono text-[11px] text-[var(--cat-ink-subtle)]">
@@ -50,7 +52,7 @@ const related: CatalogProduct[] = all
       <DetailHero product={p} />
       <TabBar product={p} />
       <RelatedProducts products={related} />
-      <section class="border-t border-[var(--cat-hairline)] mt-12 py-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <section data-availability-gate class="border-t border-[var(--cat-hairline)] mt-12 py-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h2 class="cat-display text-2xl">Need this in your project?</h2>
           <p class="text-xs text-[var(--cat-ink-muted)] mt-1">We respond within one business day.</p>
@@ -66,7 +68,21 @@ const related: CatalogProduct[] = all
   <script>
     import { initDetailPage } from '~/scripts/catalog/page-init-detail';
     import { initBasketUi } from '~/scripts/catalog/basket-ui';
-    function go() { initDetailPage(); initBasketUi(); }
+    import { readCountry, writeCountry } from '~/scripts/catalog/country';
+    import { openCountryModal } from '~/scripts/catalog/country-modal';
+
+    function go() {
+      initBasketUi();
+      const country = readCountry();
+      if (country) {
+        initDetailPage(country);
+        return;
+      }
+      openCountryModal((picked) => {
+        writeCountry(picked);
+        initDetailPage(picked);
+      });
+    }
     if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', go); }
     else { go(); }
   </script>
