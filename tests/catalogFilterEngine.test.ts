@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { applyFilters, sortProducts } from '~/scripts/catalog/filter-engine';
-import { EMPTY_FILTERS, type Filters, type CatalogProduct } from '~/scripts/catalog/types';
+import { EMPTY_FILTERS, type CatalogProduct } from '~/scripts/catalog/types';
 
 const product = (overrides: Partial<CatalogProduct>): CatalogProduct => ({
   slug: 'x', name: 'X', category: 'valves', sectors: [], standards: [], imageUrls: [],
