@@ -16,3 +16,5 @@ coverage/
 before-*.png
 after-*.png
 final-*.png
+catalog-*.png
+detail-*.png
