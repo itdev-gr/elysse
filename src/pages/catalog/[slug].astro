@@ -68,18 +68,14 @@ const related: CatalogProduct[] = all
   <script>
     import { initDetailPage } from '~/scripts/catalog/page-init-detail';
     import { initBasketUi } from '~/scripts/catalog/basket-ui';
-    import { readCountry, writeCountry } from '~/scripts/catalog/country';
     import { openCountryModal } from '~/scripts/catalog/country-modal';
 
+    // Testing mode: always show the country picker on entry, regardless of any
+    // previous pick. To restore localStorage persistence, switch back to the
+    // readCountry()/writeCountry() flow (see git history for the prior version).
     function go() {
       initBasketUi();
-      const country = readCountry();
-      if (country) {
-        initDetailPage(country);
-        return;
-      }
       openCountryModal((picked) => {
-        writeCountry(picked);
         initDetailPage(picked);
       });
     }

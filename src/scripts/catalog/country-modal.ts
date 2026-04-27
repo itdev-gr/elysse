@@ -33,7 +33,7 @@ export function openCountryModal(onPick: (country: Country) => void): void {
 
   // Focus trap + block Escape.
   activeKeydown = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') { e.preventDefault(); return; }
+    if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); return; }
     if (e.key !== 'Tab') return;
     const focusables = Array.from(modal.querySelectorAll<HTMLElement>(FOCUSABLE))
       .filter(el => !el.hasAttribute('disabled'));
