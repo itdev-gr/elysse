@@ -25,6 +25,13 @@
   font-family: 'Inter Tight', system-ui, sans-serif;
 }
 
+/* Top padding on the catalog page section — must clear the 64px fixed nav.
+ * Tailwind's pt-24 utility is shadowed by reset.css's universal `* { padding: 0 }`
+ * because reset.css is unlayered while Tailwind utilities live in `@layer`,
+ * and unlayered CSS wins over any layer regardless of specificity. */
+[data-catalog-root] > section.page-x { padding-top: 6rem; padding-bottom: 3rem; }
+[data-catalog-detail] > section.page-x { padding-top: 6rem; padding-bottom: 2rem; }
+
 .catalog-scope .cat-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.04em; }
 .catalog-scope .cat-display { font-family: 'Fraunces', Georgia, serif; }
 

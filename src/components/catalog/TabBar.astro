@@ -5,7 +5,7 @@ interface Props { product: CatalogProduct; }
 const { product: p } = Astro.props;
 ---
 <section class="mt-12 border-t border-[var(--cat-hairline)]">
-  <div role="tablist" class="sticky top-0 z-10 bg-[var(--cat-surface)] border-b border-[var(--cat-hairline)] flex gap-2 overflow-x-auto">
+  <div role="tablist" class="sticky top-16 z-10 bg-[var(--cat-surface)] border-b border-[var(--cat-hairline)] flex gap-2 overflow-x-auto">
     <button role="tab" data-tab="spec" aria-selected="true" class="cat-mono text-[11px] uppercase tracking-wider px-4 py-3 border-b-2 border-[var(--cat-accent)]">Specifications</button>
     <button role="tab" data-tab="standards" aria-selected="false" class="cat-mono text-[11px] uppercase tracking-wider px-4 py-3 border-b-2 border-transparent">Standards</button>
     <button role="tab" data-tab="install" aria-selected="false" class="cat-mono text-[11px] uppercase tracking-wider px-4 py-3 border-b-2 border-transparent">Installation</button>
