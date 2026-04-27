@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import { deriveFacets } from '~/scripts/catalog/derive-facets';
 import type { CatalogProduct } from '~/scripts/catalog/types';
 import '~/styles/catalog.css';
+import CatalogHero from '~/components/catalog/CatalogHero.astro';
 
 const collection = await getCollection('products');
 const products: CatalogProduct[] = collection.map(c => ({
@@ -35,8 +36,7 @@ const facetsJson = JSON.stringify(facets);
 <Base title="Catalog (preview) — Elysee Irrigation" description="B2B catalog preview. Filter by sector, category, size, pressure, standard.">
   <div class="catalog-scope" data-catalog-root>
     <section class="page-x py-12">
-      <h1 class="cat-display text-4xl">Catalog</h1>
-      <p class="cat-mono text-xs text-[var(--cat-ink-subtle)] mt-2">{products.length} products</p>
+      <CatalogHero count={products.length} />
 
       <!-- Phase 3 components plug in here -->
 

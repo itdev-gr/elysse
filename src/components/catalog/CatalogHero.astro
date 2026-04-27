@@ -1,0 +1,17 @@
+---
+interface Props { count: number; }
+const { count } = Astro.props;
+---
+<header class="border-b border-[var(--cat-hairline)] py-10">
+  <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+    <div>
+      <p class="cat-mono text-[11px] text-[var(--cat-ink-subtle)]">Products / Catalog (preview)</p>
+      <h1 class="cat-display text-4xl md:text-5xl mt-2">Catalog</h1>
+      <p class="cat-mono text-xs text-[var(--cat-ink-muted)] mt-2">{count} products · 4 sectors · 65 countries</p>
+    </div>
+    <label class="flex items-center gap-2 bg-[var(--cat-surface-raised)] border border-[var(--cat-hairline-strong)] rounded-md px-3 py-2 w-full md:w-[350px]">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg>
+      <input data-catalog-search type="search" placeholder="Search by code, name, or spec…" class="cat-mono text-xs w-full bg-transparent outline-none" />
+    </label>
+  </div>
+</header>
