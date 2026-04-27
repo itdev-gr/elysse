@@ -1,0 +1,47 @@
+---
+import Base from '~/layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { deriveFacets } from '~/scripts/catalog/derive-facets';
+import type { CatalogProduct } from '~/scripts/catalog/types';
+import '~/styles/catalog.css';
+
+const collection = await getCollection('products');
+const products: CatalogProduct[] = collection.map(c => ({
+  slug: c.slug,
+  name: c.data.name,
+  code: c.data.code,
+  category: c.data.category,
+  sectors: c.data.sectors,
+  material: c.data.material,
+  dnRange: c.data.dnRange,
+  pnRating: c.data.pnRating,
+  standards: c.data.standards,
+  imageUrls: c.data.imageUrls,
+  image: c.data.image,
+  blurb: c.data.blurb,
+  pressure: c.data.pressure,
+  sizeRange: c.data.sizeRange,
+  bim: c.data.bim,
+  datasheet: c.data.datasheet,
+  installation: c.data.installation,
+  specs: c.data.specs,
+  featured: c.data.featured
+}));
+
+const facets = deriveFacets(products);
+const productsJson = JSON.stringify(products);
+const facetsJson = JSON.stringify(facets);
+---
+<Base title="Catalog (preview) — Elysee Irrigation" description="B2B catalog preview. Filter by sector, category, size, pressure, standard.">
+  <div class="catalog-scope" data-catalog-root>
+    <section class="page-x py-12">
+      <h1 class="cat-display text-4xl">Catalog</h1>
+      <p class="cat-mono text-xs text-[var(--cat-ink-subtle)] mt-2">{products.length} products</p>
+
+      <!-- Phase 3 components plug in here -->
+
+      <pre data-products-json style="display:none">{productsJson}</pre>
+      <pre data-facets-json style="display:none">{facetsJson}</pre>
+    </section>
+  </div>
+</Base>
