@@ -1,4 +1,10 @@
-/* Catalog-only tokens. Imported only by /catalog routes. */
+/* Catalog-only tokens. Imported only by /catalog routes.
+ * `.catalog-scope` only declares CSS variables; it intentionally does NOT
+ * paint a background or override font/color. The QuoteBasket overlay uses
+ * this class on a full-screen `fixed inset-0` element — a fill there would
+ * cover the page underneath. The page wrappers
+ * (`[data-catalog-root]` / `[data-catalog-detail]`) get the surface fill
+ * explicitly below. */
 .catalog-scope {
   --cat-surface: #f6f1e6;
   --cat-surface-raised: #ffffff;
@@ -10,7 +16,10 @@
   --cat-accent-bright: #7eb08c;
   --cat-hairline: rgba(10, 20, 16, 0.10);
   --cat-hairline-strong: rgba(10, 20, 16, 0.18);
+}
 
+[data-catalog-root].catalog-scope,
+[data-catalog-detail].catalog-scope {
   background: var(--cat-surface);
   color: var(--cat-ink);
   font-family: 'Inter Tight', system-ui, sans-serif;
