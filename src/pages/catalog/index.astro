@@ -59,10 +59,9 @@ const facetsJson = JSON.stringify(facets);
   <QuoteBasket />
   <script>
     import { initCatalogPage } from '~/scripts/catalog/page-init';
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => initCatalogPage());
-    } else {
-      initCatalogPage();
-    }
+    import { initBasketUi } from '~/scripts/catalog/basket-ui';
+    function go() { initCatalogPage(); initBasketUi(); }
+    if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', go); }
+    else { go(); }
   </script>
 </Base>

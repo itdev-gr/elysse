@@ -61,7 +61,9 @@ const related: CatalogProduct[] = all
   <QuoteBasket />
   <script>
     import { initDetailPage } from '~/scripts/catalog/page-init-detail';
-    if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', () => initDetailPage()); }
-    else { initDetailPage(); }
+    import { initBasketUi } from '~/scripts/catalog/basket-ui';
+    function go() { initDetailPage(); initBasketUi(); }
+    if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', go); }
+    else { go(); }
   </script>
 </Base>
