@@ -12,7 +12,17 @@ const products = defineCollection({
     image: z.string(),
     specs: z.array(z.object({ key: z.string(), value: z.string() })).default([]),
     bim: z.boolean().default(false),
-    datasheet: z.string().optional()
+    datasheet: z.string().optional(),
+
+    // Catalog fields (additive)
+    code: z.string().optional(),
+    sectors: z.array(z.enum(['agriculture', 'landscape', 'building', 'industry'])).default([]),
+    material: z.string().optional(),
+    dnRange: z.tuple([z.number(), z.number()]).optional(),
+    pnRating: z.number().optional(),
+    standards: z.array(z.string()).default([]),
+    imageUrls: z.array(z.string()).default([]),
+    installation: z.string().optional()
   })
 });
 
