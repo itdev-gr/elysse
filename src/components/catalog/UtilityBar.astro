@@ -1,0 +1,31 @@
+---
+interface Props { count: number; }
+const { count } = Astro.props;
+---
+<div class="sticky top-0 z-20 bg-[var(--cat-surface)] border-b border-[var(--cat-hairline)]">
+  <div class="flex items-center justify-between gap-4 py-3">
+    <nav aria-label="Breadcrumb" class="cat-mono text-[11px] text-[var(--cat-ink-subtle)]">
+      <a href="/" class="hover:text-[var(--cat-accent)]">Home</a>
+      <span class="mx-2">/</span>
+      <span aria-current="page">Catalog</span>
+    </nav>
+    <p class="cat-mono text-[11px] text-[var(--cat-ink-muted)]" data-catalog-count>
+      Showing {count} of {count} products
+    </p>
+    <div class="flex items-center gap-3">
+      <label class="cat-mono text-[11px] text-[var(--cat-ink-muted)] flex items-center gap-2">
+        Sort
+        <select data-catalog-sort class="cat-mono text-[11px] bg-[var(--cat-surface-raised)] border border-[var(--cat-hairline-strong)] rounded-sm px-2 py-1">
+          <option value="relevance">Most relevant</option>
+          <option value="name-asc">Name A–Z</option>
+          <option value="pressure-desc">Pressure (high to low)</option>
+          <option value="newest">Newest</option>
+        </select>
+      </label>
+      <div class="flex items-center border border-[var(--cat-hairline-strong)] rounded-sm overflow-hidden" role="group" aria-label="View mode">
+        <button data-catalog-view="grid" class="cat-mono text-[11px] px-2 py-1 bg-[var(--cat-accent)] text-[var(--cat-surface-raised)]" aria-pressed="true">Grid</button>
+        <button data-catalog-view="list" class="cat-mono text-[11px] px-2 py-1" aria-pressed="false">List</button>
+      </div>
+    </div>
+  </div>
+</div>

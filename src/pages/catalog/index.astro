@@ -5,6 +5,7 @@ import { deriveFacets } from '~/scripts/catalog/derive-facets';
 import type { CatalogProduct } from '~/scripts/catalog/types';
 import '~/styles/catalog.css';
 import CatalogHero from '~/components/catalog/CatalogHero.astro';
+import UtilityBar from '~/components/catalog/UtilityBar.astro';
 
 const collection = await getCollection('products');
 const products: CatalogProduct[] = collection.map(c => ({
@@ -37,6 +38,7 @@ const facetsJson = JSON.stringify(facets);
   <div class="catalog-scope" data-catalog-root>
     <section class="page-x py-12">
       <CatalogHero count={products.length} />
+      <UtilityBar count={products.length} />
 
       <!-- Phase 3 components plug in here -->
 
