@@ -40,16 +40,16 @@ const productsJson = JSON.stringify(products);
   <div class="catalog-scope" data-catalog-root>
     <section class="page-x pt-24 pb-12">
       <CatalogHero count={products.length} />
-      <UtilityBar count={products.length} />
 
-        <div class="grid grid-cols-12 gap-6 py-6">
-          <aside class="col-span-12 md:col-span-3 lg:col-span-3">
-            <FilterRail facets={facets} count={products.length} />
-          </aside>
-          <section class="col-span-12 md:col-span-9 lg:col-span-9">
-            <ProductGrid products={products} />
-          </section>
-        </div>
+      <div class="grid grid-cols-12 gap-6 py-6">
+        <aside class="col-span-12 md:col-span-3 lg:col-span-3">
+          <FilterRail facets={facets} count={products.length} />
+        </aside>
+        <section class="col-span-12 md:col-span-9 lg:col-span-9">
+          <UtilityBar count={products.length} />
+          <ProductGrid products={products} />
+        </section>
+      </div>
 
       <pre data-products-json style="display:none">{productsJson}</pre>
     </section>
