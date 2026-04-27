@@ -6,6 +6,7 @@ import DetailHero from '~/components/catalog/DetailHero.astro';
 import TabBar from '~/components/catalog/TabBar.astro';
 import RelatedProducts from '~/components/catalog/RelatedProducts.astro';
 import '~/styles/catalog.css';
+import QuoteBasket from '~/components/catalog/QuoteBasket.astro';
 
 export async function getStaticPaths() {
   const products = await getCollection('products');
@@ -57,6 +58,7 @@ const related: CatalogProduct[] = all
       </section>
     </section>
   </div>
+  <QuoteBasket />
   <script>
     import { initDetailPage } from '~/scripts/catalog/page-init-detail';
     if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', () => initDetailPage()); }

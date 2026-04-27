@@ -8,6 +8,7 @@ import CatalogHero from '~/components/catalog/CatalogHero.astro';
 import UtilityBar from '~/components/catalog/UtilityBar.astro';
 import ProductGrid from '~/components/catalog/ProductGrid.astro';
 import FilterRail from '~/components/catalog/FilterRail.astro';
+import QuoteBasket from '~/components/catalog/QuoteBasket.astro';
 
 const collection = await getCollection('products');
 const products: CatalogProduct[] = collection.map(c => ({
@@ -55,6 +56,7 @@ const facetsJson = JSON.stringify(facets);
       <pre data-facets-json style="display:none">{facetsJson}</pre>
     </section>
   </div>
+  <QuoteBasket />
   <script>
     import { initCatalogPage } from '~/scripts/catalog/page-init';
     if (document.readyState === 'loading') {

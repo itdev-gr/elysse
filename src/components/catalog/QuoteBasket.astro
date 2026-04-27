@@ -1,0 +1,36 @@
+---
+---
+<div data-quote-basket class="catalog-scope fixed inset-0 pointer-events-none z-30">
+  <button data-basket-pill type="button" class="hidden pointer-events-auto fixed bottom-6 right-6 cat-btn cat-btn--primary shadow-lg" aria-haspopup="dialog">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3h2l2 14h11l3-9H6"/></svg>
+    Quote (<span data-basket-count>0</span>)
+  </button>
+
+  <div data-basket-drawer role="dialog" aria-label="Quote request" aria-modal="true" class="hidden pointer-events-auto fixed top-0 right-0 h-full w-full md:w-[420px] bg-[var(--cat-surface-raised)] border-l border-[var(--cat-hairline)] shadow-xl flex flex-col">
+    <header class="flex items-center justify-between border-b border-[var(--cat-hairline)] p-4">
+      <h2 class="cat-display text-lg" data-basket-title>Quote request</h2>
+      <button data-basket-close type="button" class="cat-mono text-xs" aria-label="Close">✕</button>
+    </header>
+    <div data-basket-items class="flex-1 overflow-y-auto p-4 flex flex-col gap-3"></div>
+    <div data-basket-empty class="flex-1 flex items-center justify-center p-8 text-center text-sm text-[var(--cat-ink-muted)]">
+      <p>Your quote basket is empty.<br/>Add products to request a quote.</p>
+    </div>
+    <footer data-basket-footer class="hidden border-t border-[var(--cat-hairline)] p-4 flex flex-col gap-2">
+      <button data-basket-checkout type="button" class="cat-btn cat-btn--primary w-full">Send quote request</button>
+      <button data-basket-back-to-list type="button" class="cat-btn cat-btn--ghost w-full hidden">Back to items</button>
+    </footer>
+    <form data-basket-form class="hidden flex-1 overflow-y-auto p-4 flex flex-col gap-3">
+      <label class="flex flex-col gap-1"><span class="cat-mono text-[11px]">Name *</span><input name="name" required class="border border-[var(--cat-hairline-strong)] rounded-sm px-2 py-1.5 bg-[var(--cat-surface)]" /></label>
+      <label class="flex flex-col gap-1"><span class="cat-mono text-[11px]">Company</span><input name="company" class="border border-[var(--cat-hairline-strong)] rounded-sm px-2 py-1.5 bg-[var(--cat-surface)]" /></label>
+      <label class="flex flex-col gap-1"><span class="cat-mono text-[11px]">Email *</span><input name="email" type="email" required class="border border-[var(--cat-hairline-strong)] rounded-sm px-2 py-1.5 bg-[var(--cat-surface)]" /></label>
+      <label class="flex flex-col gap-1"><span class="cat-mono text-[11px]">Phone</span><input name="phone" class="border border-[var(--cat-hairline-strong)] rounded-sm px-2 py-1.5 bg-[var(--cat-surface)]" /></label>
+      <label class="flex flex-col gap-1"><span class="cat-mono text-[11px]">Project notes</span><textarea name="notes" rows="4" class="border border-[var(--cat-hairline-strong)] rounded-sm px-2 py-1.5 bg-[var(--cat-surface)]"></textarea></label>
+      <button type="submit" class="cat-btn cat-btn--primary w-full">Send request</button>
+    </form>
+    <div data-basket-success class="hidden flex-1 flex flex-col items-center justify-center p-8 text-center gap-3">
+      <p class="cat-display text-2xl">Thanks.</p>
+      <p class="text-sm text-[var(--cat-ink-muted)]">We'll be in touch within one business day.</p>
+      <button data-basket-close type="button" class="cat-btn cat-btn--ghost mt-3">Close</button>
+    </div>
+  </div>
+</div>
