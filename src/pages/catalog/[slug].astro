@@ -1,0 +1,65 @@
+---
+import Base from '~/layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import type { CatalogProduct } from '~/scripts/catalog/types';
+import DetailHero from '~/components/catalog/DetailHero.astro';
+import TabBar from '~/components/catalog/TabBar.astro';
+import RelatedProducts from '~/components/catalog/RelatedProducts.astro';
+import '~/styles/catalog.css';
+
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+  return products.map(p => ({ params: { slug: p.slug }, props: { entry: p, all: products } }));
+}
+
+const { entry, all } = Astro.props;
+const p: CatalogProduct = {
+  slug: entry.slug,
+  name: entry.data.name, code: entry.data.code, category: entry.data.category, sectors: entry.data.sectors,
+  material: entry.data.material, dnRange: entry.data.dnRange, pnRating: entry.data.pnRating, standards: entry.data.standards,
+  imageUrls: entry.data.imageUrls, image: entry.data.image, blurb: entry.data.blurb, pressure: entry.data.pressure,
+  sizeRange: entry.data.sizeRange, bim: entry.data.bim, datasheet: entry.data.datasheet,
+  installation: entry.data.installation, specs: entry.data.specs, featured: entry.data.featured
+};
+const related: CatalogProduct[] = all
+  .filter(x => x.slug !== p.slug && (x.data.category === p.category || x.data.sectors.some(s => p.sectors.includes(s))))
+  .slice(0, 4)
+  .map(c => ({
+    slug: c.slug, name: c.data.name, code: c.data.code, category: c.data.category, sectors: c.data.sectors,
+    material: c.data.material, dnRange: c.data.dnRange, pnRating: c.data.pnRating, standards: c.data.standards,
+    imageUrls: c.data.imageUrls, image: c.data.image, blurb: c.data.blurb, pressure: c.data.pressure,
+    sizeRange: c.data.sizeRange, bim: c.data.bim, datasheet: c.data.datasheet, installation: c.data.installation,
+    specs: c.data.specs, featured: c.data.featured
+  }));
+---
+<Base title={`${p.name} — Catalog — Elysee Irrigation`} description={p.blurb}>
+  <div class="catalog-scope" data-catalog-detail>
+    <section class="page-x py-8">
+      <nav aria-label="Breadcrumb" class="cat-mono text-[11px] text-[var(--cat-ink-subtle)]">
+        <a href="/" class="hover:text-[var(--cat-accent)]">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/catalog" class="hover:text-[var(--cat-accent)]">Catalog</a>
+        <span class="mx-2">/</span>
+        <span aria-current="page">{p.name}</span>
+      </nav>
+      <DetailHero product={p} />
+      <TabBar product={p} />
+      <RelatedProducts products={related} />
+      <section class="border-t border-[var(--cat-hairline)] mt-12 py-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <h2 class="cat-display text-2xl">Need this in your project?</h2>
+          <p class="text-xs text-[var(--cat-ink-muted)] mt-1">We respond within one business day.</p>
+        </div>
+        <div class="flex gap-3">
+          <button data-add-to-quote data-slug={p.slug} data-name={p.name} data-code={p.code ?? ''} data-thumb={p.imageUrls[0] ?? p.image} class="cat-btn cat-btn--primary">Request a quote</button>
+          <a href="/#contact" class="cat-btn cat-btn--ghost">Talk to engineering</a>
+        </div>
+      </section>
+    </section>
+  </div>
+  <script>
+    import { initDetailPage } from '~/scripts/catalog/page-init-detail';
+    if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', () => initDetailPage()); }
+    else { initDetailPage(); }
+  </script>
+</Base>
