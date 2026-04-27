@@ -9,6 +9,7 @@ import UtilityBar from '~/components/catalog/UtilityBar.astro';
 import ProductGrid from '~/components/catalog/ProductGrid.astro';
 import FilterRail from '~/components/catalog/FilterRail.astro';
 import QuoteBasket from '~/components/catalog/QuoteBasket.astro';
+import CountryModal from '~/components/catalog/CountryModal.astro';
 
 const collection = await getCollection('products');
 const products: CatalogProduct[] = collection.map(c => ({
@@ -39,6 +40,7 @@ const productsJson = JSON.stringify(products);
 ---
 <Base title="Catalog (preview) — Elysee Irrigation" description="B2B catalog preview. Filter by sector, category, size, pressure, standard.">
   <div class="catalog-scope" data-catalog-root>
+    <CountryModal />
     <section class="page-x pt-24 pb-12">
       <CatalogHero count={products.length} />
 

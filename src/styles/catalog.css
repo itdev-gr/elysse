@@ -80,3 +80,36 @@
 @media (prefers-reduced-motion: reduce) {
   .catalog-scope * { transition-duration: 0ms !important; }
 }
+
+/* Country picker modal — see docs/superpowers/specs/2026-04-27-catalog-country-gate-design.md */
+.country-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.country-modal[hidden] { display: none; }
+.country-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 20, 16, 0.55);
+}
+.country-modal__panel {
+  position: relative;
+  background: var(--cat-surface-raised);
+  color: var(--cat-ink);
+  border: 1px solid var(--cat-hairline);
+  border-radius: 6px;
+  padding: 2rem 1.75rem;
+  width: 100%;
+  max-width: 28rem;
+  box-shadow: 0 20px 60px rgba(10, 20, 16, 0.25);
+  font-family: 'Inter Tight', system-ui, sans-serif;
+}
+.country-modal__choice {
+  width: 100%;
+  justify-content: center;
+}

@@ -1,0 +1,23 @@
+---
+import { COUNTRIES } from '~/scripts/catalog/types';
+---
+<div class="country-modal" data-country-modal hidden
+     role="dialog" aria-modal="true" aria-labelledby="country-modal-title">
+  <div class="country-modal__backdrop" aria-hidden="true"></div>
+  <div class="country-modal__panel" role="document">
+    <h2 id="country-modal-title" class="cat-display text-2xl">Select your country</h2>
+    <p class="text-sm text-[var(--cat-ink-muted)] mt-2">Product availability varies by region.</p>
+    <ul class="country-modal__choices mt-6 space-y-2">
+      {COUNTRIES.map(c => (
+        <li>
+          <button type="button" data-country={c.id} class="cat-btn cat-btn--ghost country-modal__choice w-full justify-center">
+            {c.label}
+          </button>
+        </li>
+      ))}
+    </ul>
+    <noscript>
+      <p class="text-sm text-[var(--cat-ink-muted)] mt-4">Please enable JavaScript to browse the catalog.</p>
+    </noscript>
+  </div>
+</div>
