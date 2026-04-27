@@ -1,0 +1,15 @@
+---
+import type { CatalogProduct } from '~/scripts/catalog/types';
+import ProductCard from './ProductCard.astro';
+import ProductRow from './ProductRow.astro';
+import EmptyResults from './EmptyResults.astro';
+interface Props { products: CatalogProduct[]; }
+const { products } = Astro.props;
+---
+<div data-products-grid class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+  {products.map(p => <ProductCard product={p} />)}
+  <EmptyResults />
+</div>
+<div data-products-list class="hidden flex-col gap-3 mt-8">
+  {products.map(p => <ProductRow product={p} />)}
+</div>

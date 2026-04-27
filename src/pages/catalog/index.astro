@@ -6,6 +6,8 @@ import type { CatalogProduct } from '~/scripts/catalog/types';
 import '~/styles/catalog.css';
 import CatalogHero from '~/components/catalog/CatalogHero.astro';
 import UtilityBar from '~/components/catalog/UtilityBar.astro';
+import ProductGrid from '~/components/catalog/ProductGrid.astro';
+import FilterRail from '~/components/catalog/FilterRail.astro';
 
 const collection = await getCollection('products');
 const products: CatalogProduct[] = collection.map(c => ({
@@ -40,7 +42,14 @@ const facetsJson = JSON.stringify(facets);
       <CatalogHero count={products.length} />
       <UtilityBar count={products.length} />
 
-      <!-- Phase 3 components plug in here -->
+        <div class="grid grid-cols-12 gap-6 py-6">
+          <aside class="col-span-12 md:col-span-3 lg:col-span-3">
+            <FilterRail facets={facets} count={products.length} />
+          </aside>
+          <section class="col-span-12 md:col-span-9 lg:col-span-9">
+            <ProductGrid products={products} />
+          </section>
+        </div>
 
       <pre data-products-json style="display:none">{productsJson}</pre>
       <pre data-facets-json style="display:none">{facetsJson}</pre>
