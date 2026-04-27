@@ -1,0 +1,14 @@
+---
+import type { CatalogProduct } from '~/scripts/catalog/types';
+import ProductCard from './ProductCard.astro';
+interface Props { products: CatalogProduct[]; }
+const { products } = Astro.props;
+---
+{products.length > 0 && (
+  <section class="mt-12">
+    <h2 class="cat-display text-2xl mb-4">Related products</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {products.map(p => <ProductCard product={p} />)}
+    </div>
+  </section>
+)}
