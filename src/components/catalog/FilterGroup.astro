@@ -1,0 +1,21 @@
+---
+interface Option { value: string; count: number; }
+interface Props { title: string; facetKey: string; options: Option[]; defaultOpen?: boolean; }
+const { title, facetKey, options, defaultOpen = false } = Astro.props;
+---
+<details open={defaultOpen} class="border-b border-[var(--cat-hairline)] py-3">
+  <summary class="cat-mono text-[11px] uppercase tracking-wider text-[var(--cat-ink-muted)] cursor-pointer flex items-center justify-between">
+    {title}
+    <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" class="transition-transform"><path d="M2 3l3 4 3-4" stroke="currentColor" fill="none" stroke-width="1.5"/></svg>
+  </summary>
+  <fieldset class="mt-2 flex flex-col gap-1.5">
+    <legend class="sr-only">{title}</legend>
+    {options.map(o => (
+      <label class="flex items-center gap-2 text-xs cursor-pointer">
+        <input type="checkbox" data-facet={facetKey} value={o.value} class="accent-[var(--cat-accent)]" />
+        <span class="flex-1">{o.value.replace(/^./, c => c.toUpperCase())}</span>
+        <span class="cat-mono text-[10px] text-[var(--cat-ink-subtle)]">{o.count}</span>
+      </label>
+    ))}
+  </fieldset>
+</details>

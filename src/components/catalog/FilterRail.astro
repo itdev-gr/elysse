@@ -1,0 +1,35 @@
+---
+import type { DerivedFacets } from '~/scripts/catalog/derive-facets';
+import FilterGroup from './FilterGroup.astro';
+import RangeFilter from './RangeFilter.astro';
+interface Props { facets: DerivedFacets; count: number; }
+const { facets } = Astro.props;
+---
+<div data-filter-rail class="cat-mono">
+  <div data-filter-rail-inner class="md:block hidden md:static fixed inset-0 z-30 md:z-auto md:bg-transparent bg-[var(--cat-surface)] md:p-0 p-4 overflow-y-auto md:overflow-visible">
+    <div class="md:hidden flex items-center justify-between mb-4">
+      <span class="cat-display text-lg">Filters</span>
+      <button type="button" data-filter-drawer-close class="cat-mono text-xs">✕</button>
+    </div>
+    <button type="button" data-clear-filters class="hidden cat-mono text-[11px] text-[var(--cat-accent)] mb-3" data-clear-visibility>Clear all</button>
+    <div data-active-filters class="flex flex-wrap gap-1 mb-3"></div>
+    <FilterGroup title="Sector" facetKey="sectors" options={facets.sectors} defaultOpen />
+    <FilterGroup title="Category" facetKey="categories" options={facets.categories} defaultOpen />
+    <FilterGroup title="Material" facetKey="materials" options={facets.materials} defaultOpen />
+    {facets.dn && <RangeFilter title="DN size" facetKey="dn" min={facets.dn.min} max={facets.dn.max} />}
+    {facets.pn && <RangeFilter title="PN pressure" facetKey="pn" min={facets.pn.min} max={facets.pn.max} />}
+    <FilterGroup title="Standards" facetKey="standards" options={facets.standards} />
+    <details class="border-b border-[var(--cat-hairline)] py-3">
+      <summary class="cat-mono text-[11px] uppercase tracking-wider text-[var(--cat-ink-muted)] cursor-pointer">Other</summary>
+      <fieldset class="mt-2 flex flex-col gap-1.5">
+        <legend class="sr-only">Other</legend>
+        <label class="flex items-center gap-2 text-xs"><input type="checkbox" data-facet="hasDatasheet" class="accent-[var(--cat-accent)]" /><span>Has datasheet</span></label>
+        <label class="flex items-center gap-2 text-xs"><input type="checkbox" data-facet="bimAvailable" class="accent-[var(--cat-accent)]" /><span>BIM available</span></label>
+      </fieldset>
+    </details>
+    <div class="md:hidden mt-4 sticky bottom-0 bg-[var(--cat-surface)] py-3 border-t border-[var(--cat-hairline)]">
+      <button type="button" data-filter-drawer-apply class="cat-btn cat-btn--primary w-full">Show <span data-filter-drawer-count>—</span> results</button>
+    </div>
+  </div>
+  <button type="button" data-filter-drawer-open class="md:hidden cat-btn cat-btn--ghost w-full mb-3">Filters <span data-filter-active-count></span></button>
+</div>
