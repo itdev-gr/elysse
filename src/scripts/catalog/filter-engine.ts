@@ -1,8 +1,12 @@
-import type { CatalogProduct, Filters, SortKey } from './types';
+import type { CatalogProduct, Country, Filters, SortKey } from './types';
 import { search } from './mini-search';
 
 function rangesOverlap(a: [number, number], b: [number, number]): boolean {
   return a[0] <= b[1] && b[0] <= a[1];
+}
+
+export function byCountry(products: CatalogProduct[], country: Country): CatalogProduct[] {
+  return products.filter(p => p.availableCountries.includes(country));
 }
 
 export function applyFilters(products: CatalogProduct[], f: Filters): CatalogProduct[] {
