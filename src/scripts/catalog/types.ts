@@ -1,6 +1,14 @@
 export type Sector = 'agriculture' | 'landscape' | 'building' | 'industry';
 export type Category = 'compression-fittings' | 'pvc-ball-valves' | 'saddles' | 'adaptor-flanged' | 'couplings' | 'valves';
 
+export type Country = 'country-1' | 'country-2' | 'country-3';
+
+export const COUNTRIES: ReadonlyArray<{ id: Country; label: string }> = [
+  { id: 'country-1', label: 'Country 1' },
+  { id: 'country-2', label: 'Country 2' },
+  { id: 'country-3', label: 'Country 3' },
+] as const;
+
 export interface CatalogProduct {
   slug: string;
   name: string;
