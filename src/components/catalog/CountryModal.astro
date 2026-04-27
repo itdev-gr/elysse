@@ -4,7 +4,7 @@ import { COUNTRIES } from '~/scripts/catalog/types';
 <div class="country-modal" data-country-modal hidden
      role="dialog" aria-modal="true" aria-labelledby="country-modal-title">
   <div class="country-modal__backdrop" aria-hidden="true"></div>
-  <div class="country-modal__panel" role="document">
+  <div class="country-modal__panel">
     <h2 id="country-modal-title" class="cat-display text-2xl">Select your country</h2>
     <p class="text-sm text-[var(--cat-ink-muted)] mt-2">Product availability varies by region.</p>
     <ul class="country-modal__choices mt-6 space-y-2">
@@ -16,8 +16,8 @@ import { COUNTRIES } from '~/scripts/catalog/types';
         </li>
       ))}
     </ul>
-    <noscript>
-      <p class="text-sm text-[var(--cat-ink-muted)] mt-4">Please enable JavaScript to browse the catalog.</p>
-    </noscript>
   </div>
 </div>
+<noscript>
+  <p class="country-modal__noscript">Please enable JavaScript to browse the catalog.</p>
+</noscript>

@@ -113,3 +113,17 @@
   width: 100%;
   justify-content: center;
 }
+
+.country-modal__noscript {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: var(--cat-surface);
+  color: var(--cat-ink);
+  font-family: 'Inter Tight', system-ui, sans-serif;
+  margin: 0;
+}
