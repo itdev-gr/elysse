@@ -3,6 +3,8 @@ import Base from '~/layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import { deriveFacets } from '~/scripts/catalog/derive-facets';
 import type { CatalogProduct } from '~/scripts/catalog/types';
+import { COUNTRIES, type Country } from '~/scripts/catalog/types';
+import { byCountry } from '~/scripts/catalog/filter-engine';
 import '~/styles/catalog.css';
 import CatalogHero from '~/components/catalog/CatalogHero.astro';
 import UtilityBar from '~/components/catalog/UtilityBar.astro';
@@ -36,6 +38,15 @@ const products: CatalogProduct[] = collection.map(c => ({
 }));
 
 const facets = deriveFacets(products);
+
+const productsByCountry = Object.fromEntries(
+  COUNTRIES.map(c => [c.id, byCountry(products, c.id)])
+) as Record<Country, typeof products>;
+
+const facetsByCountry = Object.fromEntries(
+  COUNTRIES.map(c => [c.id, deriveFacets(productsByCountry[c.id])])
+) as Record<Country, typeof facets>;
+
 const productsJson = JSON.stringify(products);
 ---
 <Base title="Catalog (preview) — Elysee Irrigation" description="B2B catalog preview. Filter by sector, category, size, pressure, standard.">
@@ -46,7 +57,11 @@ const productsJson = JSON.stringify(products);
 
       <div class="grid grid-cols-12 gap-6 py-6">
         <aside class="col-span-12 md:col-span-3 lg:col-span-3">
-          <FilterRail facets={facets} count={products.length} />
+          {COUNTRIES.map(c => (
+            <div data-country-rail={c.id} hidden>
+              <FilterRail facets={facetsByCountry[c.id]} count={productsByCountry[c.id].length} />
+            </div>
+          ))}
         </aside>
         <section class="col-span-12 md:col-span-9 lg:col-span-9">
           <UtilityBar count={products.length} />

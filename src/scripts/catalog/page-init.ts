@@ -8,6 +8,15 @@ export function initCatalogPage(country: Country) {
   const root = document.querySelector<HTMLElement>('[data-catalog-root]');
   if (!root) return;
 
+  // Remove inactive country rails before any selectors run.
+  root.querySelectorAll<HTMLElement>('[data-country-rail]').forEach(el => {
+    if (el.dataset.countryRail === country) {
+      el.removeAttribute('hidden');
+    } else {
+      el.remove();
+    }
+  });
+
   const productsJson = root.querySelector<HTMLElement>('[data-products-json]')?.textContent ?? '[]';
   const allProducts: CatalogProduct[] = JSON.parse(productsJson);
   const products: CatalogProduct[] = byCountry(allProducts, country);
