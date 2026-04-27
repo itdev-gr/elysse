@@ -1,0 +1,20 @@
+---
+import type { CatalogProduct } from '~/scripts/catalog/types';
+import { formatDN, formatPN, formatSectorList } from '~/scripts/catalog/format';
+interface Props { product: CatalogProduct; }
+const { product: p } = Astro.props;
+const rows: { k: string; v: string }[] = [
+  ...(p.code ? [{ k: 'Product code', v: p.code }] : []),
+  ...(p.dnRange ? [{ k: 'DN size', v: formatDN(p.dnRange) }] : []),
+  ...(p.pnRating !== undefined ? [{ k: 'Pressure rating', v: formatPN(p.pnRating) }] : []),
+  ...(p.material ? [{ k: 'Material', v: p.material }] : []),
+  ...(p.sectors.length ? [{ k: 'Sectors', v: formatSectorList(p.sectors) }] : []),
+  ...p.specs.map(s => ({ k: s.key, v: s.value })),
+  ...(p.standards.length ? [{ k: 'Standards', v: p.standards.join(', ') }] : [])
+];
+---
+<table class="cat-table">
+  <tbody>
+    {rows.map(r => <tr><th scope="row">{r.k}</th><td>{r.v}</td></tr>)}
+  </tbody>
+</table>
