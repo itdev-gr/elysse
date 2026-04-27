@@ -55,4 +55,12 @@ const facetsJson = JSON.stringify(facets);
       <pre data-facets-json style="display:none">{facetsJson}</pre>
     </section>
   </div>
+  <script>
+    import { initCatalogPage } from '~/scripts/catalog/page-init';
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => initCatalogPage());
+    } else {
+      initCatalogPage();
+    }
+  </script>
 </Base>
