@@ -9,6 +9,7 @@ let previouslyFocused: Element | null = null;
 export function openCountryModal(onPick: (country: Country) => void): void {
   const modal = document.querySelector<HTMLElement>('[data-country-modal]');
   if (!modal) return;
+  if (activeKeydown) return; // already open
 
   previouslyFocused = document.activeElement;
   priorBodyOverflow = document.body.style.overflow;
