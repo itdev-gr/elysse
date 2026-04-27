@@ -1,15 +1,16 @@
-import type { CatalogProduct, Filters, SortKey } from './types';
+import type { CatalogProduct, Country, Filters, SortKey } from './types';
 import { EMPTY_FILTERS } from './types';
-import { applyFilters, sortProducts } from './filter-engine';
+import { applyFilters, byCountry, sortProducts } from './filter-engine';
 import { encodeFilters, decodeFilters } from './url-state';
 import { getBasket } from './basket-store';
 
-export function initCatalogPage() {
+export function initCatalogPage(country: Country) {
   const root = document.querySelector<HTMLElement>('[data-catalog-root]');
   if (!root) return;
 
   const productsJson = root.querySelector<HTMLElement>('[data-products-json]')?.textContent ?? '[]';
-  const products: CatalogProduct[] = JSON.parse(productsJson);
+  const allProducts: CatalogProduct[] = JSON.parse(productsJson);
+  const products: CatalogProduct[] = byCountry(allProducts, country);
 
   const grid = root.querySelector<HTMLElement>('[data-products-grid]');
   const list = root.querySelector<HTMLElement>('[data-products-list]');

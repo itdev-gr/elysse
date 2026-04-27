@@ -61,7 +61,21 @@ const productsJson = JSON.stringify(products);
   <script>
     import { initCatalogPage } from '~/scripts/catalog/page-init';
     import { initBasketUi } from '~/scripts/catalog/basket-ui';
-    function go() { initCatalogPage(); initBasketUi(); }
+    import { readCountry, writeCountry } from '~/scripts/catalog/country';
+    import { openCountryModal } from '~/scripts/catalog/country-modal';
+
+    function go() {
+      initBasketUi();
+      const country = readCountry();
+      if (country) {
+        initCatalogPage(country);
+        return;
+      }
+      openCountryModal((picked) => {
+        writeCountry(picked);
+        initCatalogPage(picked);
+      });
+    }
     if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', go); }
     else { go(); }
   </script>
