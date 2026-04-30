@@ -25,7 +25,7 @@ const main = p.imageUrls[0] ?? p.image;
       <button data-add-to-quote data-slug={p.slug} data-name={p.name} data-code={p.code ?? ''} data-thumb={main} class="cat-btn cat-btn--primary">Add to quote</button>
       {p.datasheet && <a href={p.datasheet} class="cat-btn cat-btn--ghost"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 17v4h16v-4"/></svg>Download datasheet</a>}
       {p.bim && <a href="https://elysee.partcommunity.com" class="cat-btn cat-btn--ghost">View BIM</a>}
-      {p.slug === 'epsilon' && <a href="/products/epsilon" class="cat-mono text-[11px] text-[var(--cat-accent)] hover:text-[var(--cat-accent-bright)] mt-2">Discover the technology →</a>}
+      {p.slug === 'epsilon' && <a href="/catalog/compression-fittings/epsilon" class="cat-mono text-[11px] text-[var(--cat-accent)] hover:text-[var(--cat-accent-bright)] mt-2">Discover the technology →</a>}
     </div>
   </aside>
 </section>
