@@ -1,6 +1,7 @@
 ---
 import Base from '~/layouts/Base.astro';
 import CategoryCard from '~/components/products/CategoryCard.astro';
+import CountryModal from '~/components/catalog/CountryModal.astro';
 import { getCollection } from 'astro:content';
 import '~/styles/catalog.css';
 
@@ -8,6 +9,7 @@ const categories = (await getCollection('categories')).sort((a, b) => a.data.ord
 ---
 <Base title="Products — Elysee Irrigation" description="13 product categories: compression fittings, valves, saddles, pipes, drainage, and more.">
   <div class="catalog-scope">
+    <CountryModal />
     <section class="page-x pt-24 pb-12">
       <nav aria-label="Breadcrumb" class="cat-mono text-[11px] text-[var(--cat-ink-subtle)]">
         <a href="/" class="hover:text-[var(--cat-accent)]">Home</a>
@@ -33,4 +35,10 @@ const categories = (await getCollection('categories')).sort((a, b) => a.data.ord
       </div>
     </section>
   </div>
+  <script>
+    import { openCountryModal } from '~/scripts/catalog/country-modal';
+    function go() { openCountryModal(() => {}); }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go);
+    else go();
+  </script>
 </Base>
