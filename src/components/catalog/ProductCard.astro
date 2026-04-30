@@ -1,20 +1,29 @@
 ---
 import type { CatalogProduct } from '~/scripts/catalog/types';
+import { imagesForProduct } from '~/scripts/catalog/per-country-images';
 interface Props { product: CatalogProduct; }
 const { product: p } = Astro.props;
-const thumb = p.imageUrls[0] ?? p.image;
+const fallback = p.imageUrls[0] ?? p.image;
+const perCountry = imagesForProduct(p.slug);
 const detailUrl = `/catalog/${p.categorySlug}/${p.slug}`;
 ---
 <article class="cat-card overflow-hidden flex flex-col" data-product-card data-slug={p.slug}>
   <a href={detailUrl} class="block aspect-square bg-white">
-    <img src={thumb} alt={p.name} loading="lazy" width="320" height="320" class="w-full h-full object-contain p-4" />
+    {perCountry ? (
+      <>
+        <img src={perCountry['country-1']} data-for-country="country-1" alt={p.name} loading="lazy" width="320" height="320" class="w-full h-full object-contain p-4" />
+        <img src={perCountry['country-2']} data-for-country="country-2" alt={p.name} loading="lazy" width="320" height="320" class="w-full h-full object-contain p-4" />
+      </>
+    ) : (
+      <img src={fallback} alt={p.name} loading="lazy" width="320" height="320" class="w-full h-full object-contain p-4" />
+    )}
   </a>
   <div class="p-4 flex flex-col gap-2 flex-1">
     {p.code && <p class="cat-mono text-[11px] text-[var(--cat-ink-subtle)]">{p.code}</p>}
     <a href={detailUrl} class="cat-display text-[22px] leading-tight hover:text-[var(--cat-accent)]">{p.name}</a>
     <p class="text-xs text-[var(--cat-ink-muted)] line-clamp-2">{p.blurb}</p>
     <div class="flex items-center justify-between mt-auto pt-3">
-      <button data-add-to-quote data-slug={p.slug} data-name={p.name} data-code={p.code ?? ''} data-thumb={thumb} class="cat-btn cat-btn--ghost">Add to quote</button>
+      <button data-add-to-quote data-slug={p.slug} data-name={p.name} data-code={p.code ?? ''} data-thumb={fallback} class="cat-btn cat-btn--ghost">Add to quote</button>
       <a href={detailUrl} class="cat-mono text-[11px] text-[var(--cat-accent)] hover:text-[var(--cat-accent-bright)]">View →</a>
     </div>
   </div>

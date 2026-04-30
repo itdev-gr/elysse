@@ -3,28 +3,13 @@ import type { CatalogProduct } from '~/scripts/catalog/types';
 import KeySpecs from './KeySpecs.astro';
 import SkuTable from './SkuTable.astro';
 import { skuTableRowsForProduct } from '~/scripts/catalog/sku-tables';
+import { imagesForProduct } from '~/scripts/catalog/per-country-images';
 
 interface Props { product: CatalogProduct; }
 const { product: p } = Astro.props;
 
-interface ImagesByCountry {
-  'country-1': string;
-  'country-2': string;
-  'country-3'?: string;
-}
-const PER_COUNTRY_IMAGES: Record<string, ImagesByCountry> = {
-  'coupling-epsilon-pn16': {
-    'country-1': '/images/products/coupling-epsilon-pn16-elysee.png',
-    'country-2': '/images/products/coupling-epsilon-pn16-rohrsysteme.png'
-  },
-  'coupling-transition': {
-    'country-1': '/images/products/coupling-transition-elysee.png',
-    'country-2': '/images/products/coupling-transition-rohrsysteme.png'
-  }
-};
-
 const fallback = p.imageUrls[0] ?? p.image;
-const perCountry = PER_COUNTRY_IMAGES[p.slug];
+const perCountry = imagesForProduct(p.slug);
 const skuRows = skuTableRowsForProduct(p.slug);
 ---
 <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-6">

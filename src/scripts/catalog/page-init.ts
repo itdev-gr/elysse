@@ -7,6 +7,7 @@ import { getBasket } from './basket-store';
 export function initCatalogPage(country: Country, categorySlug: CategorySlug) {
   const root = document.querySelector<HTMLElement>('[data-catalog-root]');
   if (!root) return;
+  root.setAttribute('data-active-country', country);
 
   // Remove inactive country rails before any selectors run.
   root.querySelectorAll<HTMLElement>('[data-country-rail]').forEach(el => {
