@@ -104,20 +104,21 @@ const related: CatalogProduct[] = all
     </section>
   </div>
   <QuoteBasket />
-  <script define:vars={{ category }}>
-    import('~/scripts/catalog/page-init-detail').then(({ initDetailPage }) => {
-      import('~/scripts/catalog/basket-ui').then(({ initBasketUi }) => {
-        import('~/scripts/catalog/country-modal').then(({ openCountryModal }) => {
-          function go() {
-            initBasketUi();
-            openCountryModal((picked) => {
-              initDetailPage(picked, category);
-            });
-          }
-          if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go);
-          else go();
-        });
+  <script>
+    import { initDetailPage } from '~/scripts/catalog/page-init-detail';
+    import { initBasketUi } from '~/scripts/catalog/basket-ui';
+    import { openCountryModal } from '~/scripts/catalog/country-modal';
+
+    function go() {
+      initBasketUi();
+      // Category is the second segment of /catalog/<category>/<product>.
+      const parts = window.location.pathname.split('/').filter(Boolean);
+      const category = parts[1];
+      openCountryModal((picked) => {
+        initDetailPage(picked, category);
       });
-    });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go);
+    else go();
   </script>
 </Base>
