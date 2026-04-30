@@ -110,6 +110,7 @@ const productsJson = JSON.stringify(products);
     import { initCatalogPage } from '~/scripts/catalog/page-init';
     import { initBasketUi } from '~/scripts/catalog/basket-ui';
     import { openCountryModal } from '~/scripts/catalog/country-modal';
+    import { readCountry, writeCountry } from '~/scripts/catalog/country';
 
     function go() {
       initBasketUi();
@@ -118,7 +119,13 @@ const productsJson = JSON.stringify(products);
       // Category is the second segment of /catalog/<category>.
       const parts = window.location.pathname.split('/').filter(Boolean);
       const category = parts[1];
+      const stored = readCountry();
+      if (stored) {
+        initCatalogPage(stored, category);
+        return;
+      }
       openCountryModal((picked) => {
+        writeCountry(picked);
         initCatalogPage(picked, category);
       });
     }

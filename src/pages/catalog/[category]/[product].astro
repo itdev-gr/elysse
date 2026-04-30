@@ -108,13 +108,20 @@ const related: CatalogProduct[] = all
     import { initDetailPage } from '~/scripts/catalog/page-init-detail';
     import { initBasketUi } from '~/scripts/catalog/basket-ui';
     import { openCountryModal } from '~/scripts/catalog/country-modal';
+    import { readCountry, writeCountry } from '~/scripts/catalog/country';
 
     function go() {
       initBasketUi();
       // Category is the second segment of /catalog/<category>/<product>.
       const parts = window.location.pathname.split('/').filter(Boolean);
       const category = parts[1];
+      const stored = readCountry();
+      if (stored) {
+        initDetailPage(stored, category);
+        return;
+      }
       openCountryModal((picked) => {
+        writeCountry(picked);
         initDetailPage(picked, category);
       });
     }
