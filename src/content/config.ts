@@ -28,6 +28,19 @@ const products = defineCollection({
   })
 });
 
+const categories = defineCollection({
+  type: 'content',
+  schema: z.object({
+    name: z.string(),
+    slug: z.string().optional(),
+    order: z.number().int().nonnegative(),
+    image: z.string(),
+    sourceImage: z.string().url().optional(),
+    leafletPdf: z.string().optional(),
+    blurb: z.string()
+  })
+});
+
 const sectors = defineCollection({
   type: 'content',
   schema: z.object({
@@ -50,4 +63,4 @@ const insights = defineCollection({
   })
 });
 
-export const collections = { products, sectors, insights };
+export const collections = { products, sectors, insights, categories };
