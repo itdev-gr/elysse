@@ -5,6 +5,7 @@ import { getBasket } from './basket-store';
 export function initDetailPage(country: Country, categorySlug: CategorySlug) {
   const root = document.querySelector<HTMLElement>('[data-catalog-detail]');
   if (!root) return;
+  root.setAttribute('data-active-country', country);
 
   const productCountriesAttr = root.dataset.productCountries ?? '';
   const productCountries = productCountriesAttr.split(',').filter(Boolean) as Country[];
