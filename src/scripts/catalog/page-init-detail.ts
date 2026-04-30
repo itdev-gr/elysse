@@ -1,8 +1,8 @@
-import type { Country } from './types';
+import type { Country, CategorySlug } from './types';
 import { COUNTRIES } from './types';
 import { getBasket } from './basket-store';
 
-export function initDetailPage(country: Country) {
+export function initDetailPage(country: Country, categorySlug: CategorySlug) {
   const root = document.querySelector<HTMLElement>('[data-catalog-detail]');
   if (!root) return;
 
