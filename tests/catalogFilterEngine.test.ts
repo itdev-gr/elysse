@@ -3,16 +3,16 @@ import { applyFilters, sortProducts } from '~/scripts/catalog/filter-engine';
 import { EMPTY_FILTERS, type CatalogProduct } from '~/scripts/catalog/types';
 
 const product = (overrides: Partial<CatalogProduct>): CatalogProduct => ({
-  slug: 'x', name: 'X', category: 'valves', sectors: [], standards: [], imageUrls: [],
+  slug: 'x', name: 'X', categorySlug: 'valves', sectors: [], standards: [], imageUrls: [],
   image: '', blurb: '', pressure: '', sizeRange: '', bim: false, specs: [], featured: false,
   availableCountries: ['country-1', 'country-2', 'country-3'],
   ...overrides
 });
 
 const ps: CatalogProduct[] = [
-  product({ slug: 'a', name: 'A', code: 'A1', sectors: ['agriculture'], category: 'valves',           pnRating: 16, dnRange: [20, 50],  standards: ['EN 1452'], material: 'PVC-U' }),
-  product({ slug: 'b', name: 'B', code: 'B1', sectors: ['industry'],    category: 'compression-fittings', pnRating: 10, dnRange: [50, 110], standards: ['ISO 17885'], material: 'POM',   bim: true,  datasheet: '/x.pdf' }),
-  product({ slug: 'c', name: 'C', code: 'C1', sectors: ['landscape'],   category: 'valves',           pnRating: 16, dnRange: [16, 32],  standards: ['EN 1452'], material: 'PVC-U' })
+  product({ slug: 'a', name: 'A', code: 'A1', sectors: ['agriculture'], categorySlug: 'valves',           pnRating: 16, dnRange: [20, 50],  standards: ['EN 1452'], material: 'PVC-U' }),
+  product({ slug: 'b', name: 'B', code: 'B1', sectors: ['industry'],    categorySlug: 'compression-fittings', pnRating: 10, dnRange: [50, 110], standards: ['ISO 17885'], material: 'POM',   bim: true,  datasheet: '/x.pdf' }),
+  product({ slug: 'c', name: 'C', code: 'C1', sectors: ['landscape'],   categorySlug: 'valves',           pnRating: 16, dnRange: [16, 32],  standards: ['EN 1452'], material: 'PVC-U' })
 ];
 
 describe('applyFilters', () => {
@@ -22,11 +22,8 @@ describe('applyFilters', () => {
   it('filters by sector (OR within facet)', () => {
     expect(applyFilters(ps, { ...EMPTY_FILTERS, sectors: ['agriculture', 'industry'] }).map(p => p.slug).sort()).toEqual(['a', 'b']);
   });
-  it('filters by category', () => {
-    expect(applyFilters(ps, { ...EMPTY_FILTERS, categories: ['valves'] }).map(p => p.slug).sort()).toEqual(['a', 'c']);
-  });
   it('AND across facets', () => {
-    expect(applyFilters(ps, { ...EMPTY_FILTERS, sectors: ['agriculture'], categories: ['valves'] }).map(p => p.slug)).toEqual(['a']);
+    expect(applyFilters(ps, { ...EMPTY_FILTERS, sectors: ['agriculture'], materials: ['PVC-U'] }).map(p => p.slug)).toEqual(['a']);
   });
   it('range filter on PN', () => {
     expect(applyFilters(ps, { ...EMPTY_FILTERS, pn: [16, 16] }).map(p => p.slug).sort()).toEqual(['a', 'c']);

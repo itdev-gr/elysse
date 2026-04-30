@@ -1,5 +1,4 @@
 export type Sector = 'agriculture' | 'landscape' | 'building' | 'industry';
-export type Category = 'compression-fittings' | 'pvc-ball-valves' | 'saddles' | 'adaptor-flanged' | 'couplings' | 'valves';
 
 export type Country = 'country-1' | 'country-2' | 'country-3';
 
@@ -28,7 +27,7 @@ export interface CatalogProduct {
   slug: string;
   name: string;
   code?: string;
-  category: Category;
+  categorySlug: CategorySlug;
   sectors: Sector[];
   material?: string;
   dnRange?: [number, number];
@@ -50,7 +49,6 @@ export interface CatalogProduct {
 export interface Filters {
   search: string;
   sectors: Sector[];
-  categories: Category[];
   materials: string[];
   standards: string[];
   dn?: [number, number];
@@ -62,7 +60,6 @@ export interface Filters {
 export const EMPTY_FILTERS: Filters = {
   search: '',
   sectors: [],
-  categories: [],
   materials: [],
   standards: [],
   hasDatasheet: false,

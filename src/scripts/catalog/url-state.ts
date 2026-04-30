@@ -1,13 +1,11 @@
-import type { Filters, Sector, Category } from './types';
+import type { Filters, Sector } from './types';
 
 const SECTORS: Sector[] = ['agriculture', 'landscape', 'building', 'industry'];
-const CATEGORIES: Category[] = ['compression-fittings', 'pvc-ball-valves', 'saddles', 'adaptor-flanged', 'couplings', 'valves'];
 
 export function encodeFilters(f: Filters): string {
   const params = new URLSearchParams();
   if (f.search) params.set('q', f.search);
   if (f.sectors.length) params.set('sectors', f.sectors.join(','));
-  if (f.categories.length) params.set('categories', f.categories.join(','));
   if (f.materials.length) params.set('materials', f.materials.join(','));
   if (f.standards.length) params.set('standards', f.standards.join(','));
   if (f.dn) params.set('dn', `${f.dn[0]}-${f.dn[1]}`);
@@ -33,7 +31,6 @@ export function decodeFilters(qs: string): Filters {
   return {
     search: params.get('q') ?? '',
     sectors: parseList(params.get('sectors'), SECTORS),
-    categories: parseList(params.get('categories'), CATEGORIES),
     materials: params.get('materials')?.split(',').filter(Boolean) ?? [],
     standards: params.get('standards')?.split(',').filter(Boolean) ?? [],
     dn: parseRange(params.get('dn')),

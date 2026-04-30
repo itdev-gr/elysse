@@ -1,11 +1,10 @@
-import type { CatalogProduct, Sector, Category } from './types';
+import type { CatalogProduct, Sector } from './types';
 
 export interface FacetCount<T> { value: T; count: number; }
 export interface RangeFacet { min: number; max: number; }
 
 export interface DerivedFacets {
   sectors: FacetCount<Sector>[];
-  categories: FacetCount<Category>[];
   materials: FacetCount<string>[];
   standards: FacetCount<string>[];
   dn: RangeFacet | null;
@@ -40,7 +39,6 @@ export function deriveFacets(products: CatalogProduct[]): DerivedFacets {
   const pnValues = products.flatMap(p => p.pnRating !== undefined ? [p.pnRating] : []);
   return {
     sectors: tally(products.map(p => p.sectors)),
-    categories: tally(products.map(p => [p.category])),
     materials: tallyAlpha(products.flatMap(p => p.material ? [[p.material]] : [])),
     standards: tally(products.map(p => p.standards)),
     dn: range(dnValues),

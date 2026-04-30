@@ -4,7 +4,7 @@ const products = defineCollection({
   type: 'content',
   schema: z.object({
     name: z.string(),
-    category: z.enum(['compression-fittings', 'pvc-ball-valves', 'saddles', 'adaptor-flanged', 'couplings', 'valves']),
+    categorySlug: z.enum(['compression-fittings', 'hydraulic-fittings', 'saddles', 'light-weight-fittings', 'valves', 'filters-and-dosers', 'micro-irrigation-and-sprinklers', 'turf', 'polyethylene-pipes', 'pvc-pressure-pipes-and-fittings', 'network-drainage', 'cable-applications', 'building-sewerage']),
     blurb: z.string(),
     pressure: z.string(),
     sizeRange: z.string(),

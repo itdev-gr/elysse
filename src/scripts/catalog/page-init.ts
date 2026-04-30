@@ -83,7 +83,6 @@ export function initCatalogPage(country: Country) {
     if (!activeChips) return;
     const chips: string[] = [];
     filters.sectors.forEach(s => chips.push(chip('sectors', s, chipLabel(s))));
-    filters.categories.forEach(c => chips.push(chip('categories', c, chipLabel(c))));
     filters.materials.forEach(m => chips.push(chip('materials', m, m)));
     filters.standards.forEach(s => chips.push(chip('standards', s, s)));
     if (filters.dn)            chips.push(rangeChip('dn', `DN ${filters.dn[0]}–${filters.dn[1]}`));
@@ -240,7 +239,7 @@ export function initCatalogPage(country: Country) {
   drawerApplyBtn?.addEventListener('click', () => setDrawer(false));
 
   function activeCount(): number {
-    return filters.sectors.length + filters.categories.length + filters.materials.length + filters.standards.length
+    return filters.sectors.length + filters.materials.length + filters.standards.length
       + (filters.dn ? 1 : 0) + (filters.pn ? 1 : 0) + (filters.hasDatasheet ? 1 : 0) + (filters.bimAvailable ? 1 : 0);
   }
   function refreshDrawerLabels(filteredCount: number) {

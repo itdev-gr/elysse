@@ -5,7 +5,6 @@ import type { CatalogProduct, CategorySlug } from '~/scripts/catalog/types';
 const make = (slug: string, categorySlug: CategorySlug): CatalogProduct => ({
   slug,
   name: slug,
-  category: 'valves' as any, // legacy field — removed in Task 3
   categorySlug,
   sectors: [],
   standards: [],
@@ -18,7 +17,7 @@ const make = (slug: string, categorySlug: CategorySlug): CatalogProduct => ({
   specs: [],
   featured: false,
   availableCountries: ['country-1', 'country-2', 'country-3'],
-} as unknown as CatalogProduct);
+});
 
 describe('byCategory', () => {
   const products: CatalogProduct[] = [

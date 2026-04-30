@@ -7,7 +7,7 @@ import { getEntry, getCollection } from 'astro:content';
 
 const epsilon = await getEntry('products', 'epsilon');
 if (!epsilon) throw new Error('Epsilon product not found');
-const related = (await getCollection('products')).filter(p => p.data.category === epsilon.data.category && p.slug !== 'epsilon').slice(0, 4);
+const related = (await getCollection('products')).filter(p => p.data.categorySlug === epsilon.data.categorySlug && p.slug !== 'epsilon').slice(0, 4);
 
 const productLd = {
   '@context': 'https://schema.org',
@@ -86,7 +86,7 @@ const productLd = {
       {related.map(r => (
         <a href={`/products/${r.slug}`} class="group block">
           <div class="aspect-[4/5] overflow-hidden rounded-md bg-surface-relief"><img src={r.data.image} alt={r.data.name} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" width="800" height="1000" loading="lazy" /></div>
-          <p class="mono text-text-mono mt-3">{r.data.category.replace(/-/g, ' ')}</p>
+          <p class="mono text-text-mono mt-3">{r.data.categorySlug.replace(/-/g, ' ')}</p>
           <h3 class="font-display text-xl mt-1">{r.data.name}</h3>
         </a>
       ))}

@@ -3,7 +3,7 @@ import { search } from '~/scripts/catalog/mini-search';
 import type { CatalogProduct } from '~/scripts/catalog/types';
 
 const product = (overrides: Partial<CatalogProduct>): CatalogProduct => ({
-  slug: 'x', name: 'X', category: 'valves', sectors: [], standards: [], imageUrls: [],
+  slug: 'x', name: 'X', categorySlug: 'valves', sectors: [], standards: [], imageUrls: [],
   image: '', blurb: '', pressure: '', sizeRange: '', bim: false, specs: [], featured: false,
   availableCountries: ['country-1', 'country-2', 'country-3'],
   ...overrides

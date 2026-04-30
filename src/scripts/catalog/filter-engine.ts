@@ -16,7 +16,6 @@ export function byCategory(products: CatalogProduct[], category: CategorySlug): 
 export function applyFilters(products: CatalogProduct[], f: Filters): CatalogProduct[] {
   let out = search(products, f.search);
   if (f.sectors.length)    out = out.filter(p => p.sectors.some(s => f.sectors.includes(s)));
-  if (f.categories.length) out = out.filter(p => f.categories.includes(p.category));
   if (f.materials.length)  out = out.filter(p => p.material && f.materials.includes(p.material));
   if (f.standards.length)  out = out.filter(p => p.standards.some(s => f.standards.includes(s)));
   if (f.dn)                out = out.filter(p => p.dnRange && rangesOverlap(p.dnRange, f.dn!));

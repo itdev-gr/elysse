@@ -5,7 +5,7 @@ import type { CatalogProduct, Country } from '~/scripts/catalog/types';
 const make = (slug: string, countries: Country[]): CatalogProduct => ({
   slug,
   name: slug,
-  category: 'valves',
+  categorySlug: 'valves',
   sectors: [],
   standards: [],
   imageUrls: [],

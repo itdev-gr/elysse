@@ -7,11 +7,11 @@ describe('url-state', () => {
     expect(encodeFilters(EMPTY_FILTERS)).toBe('');
   });
 
-  it('round-trips sectors and categories', () => {
-    const f: Filters = { ...EMPTY_FILTERS, sectors: ['agriculture', 'industry'], categories: ['valves'] };
+  it('round-trips sectors and materials', () => {
+    const f: Filters = { ...EMPTY_FILTERS, sectors: ['agriculture', 'industry'], materials: ['PVC-U'] };
     const encoded = encodeFilters(f);
     expect(encoded).toContain('sectors=agriculture%2Cindustry');
-    expect(encoded).toContain('categories=valves');
+    expect(encoded).toContain('materials=PVC-U');
     expect(decodeFilters(encoded)).toEqual(f);
   });
 
