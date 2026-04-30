@@ -1,0 +1,127 @@
+---
+import Base from '~/layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { deriveFacets } from '~/scripts/catalog/derive-facets';
+import { byCategory, byCountry } from '~/scripts/catalog/filter-engine';
+import { COUNTRIES, type Country, type CatalogProduct, type CategorySlug } from '~/scripts/catalog/types';
+import '~/styles/catalog.css';
+import UtilityBar from '~/components/catalog/UtilityBar.astro';
+import ProductGrid from '~/components/catalog/ProductGrid.astro';
+import FilterRail from '~/components/catalog/FilterRail.astro';
+import QuoteBasket from '~/components/catalog/QuoteBasket.astro';
+import CountryModal from '~/components/catalog/CountryModal.astro';
+import CategoriesNav from '~/components/catalog/CategoriesNav.astro';
+
+export async function getStaticPaths() {
+  const categories = await getCollection('categories');
+  return categories.map(c => ({ params: { category: c.data.slug ?? c.slug }, props: { categoryEntry: c } }));
+}
+
+const { category } = Astro.params as { category: CategorySlug };
+const { categoryEntry } = Astro.props;
+
+const collection = await getCollection('products');
+const products: CatalogProduct[] = collection.map(c => ({
+  slug: c.slug,
+  name: c.data.name,
+  code: c.data.code,
+  categorySlug: c.data.categorySlug,
+  sectors: c.data.sectors,
+  material: c.data.material,
+  dnRange: c.data.dnRange,
+  pnRating: c.data.pnRating,
+  standards: c.data.standards,
+  imageUrls: c.data.imageUrls,
+  image: c.data.image,
+  blurb: c.data.blurb,
+  pressure: c.data.pressure,
+  sizeRange: c.data.sizeRange,
+  bim: c.data.bim,
+  datasheet: c.data.datasheet,
+  installation: c.data.installation,
+  specs: c.data.specs,
+  featured: c.data.featured,
+  availableCountries: c.data.availableCountries
+}));
+
+const categoryProducts = byCategory(products, category);
+const isEmpty = categoryProducts.length === 0;
+
+const productsByCountry = Object.fromEntries(
+  COUNTRIES.map(c => [c.id, byCategory(byCountry(products, c.id), category)])
+) as Record<Country, CatalogProduct[]>;
+
+const facetsByCountry = Object.fromEntries(
+  COUNTRIES.map(c => [c.id, deriveFacets(productsByCountry[c.id])])
+) as Record<Country, ReturnType<typeof deriveFacets>>;
+
+const productsJson = JSON.stringify(products);
+---
+<Base title={`${categoryEntry.data.name} — Catalog — Elysee Irrigation`} description={categoryEntry.data.blurb}>
+  <div class="catalog-scope" data-catalog-root>
+    {!isEmpty && <CountryModal />}
+    <section class="page-x pt-24 pb-12">
+      <nav aria-label="Breadcrumb" class="cat-mono text-[11px] text-[var(--cat-ink-subtle)]">
+        <a href="/" class="hover:text-[var(--cat-accent)]">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/products" class="hover:text-[var(--cat-accent)]">Products</a>
+        <span class="mx-2">/</span>
+        <span aria-current="page">{categoryEntry.data.name}</span>
+      </nav>
+
+      <header class="mt-6 mb-8">
+        <h1 class="cat-display text-4xl">{categoryEntry.data.name}</h1>
+        <p class="text-sm text-[var(--cat-ink-muted)] mt-2">{categoryEntry.data.blurb}</p>
+      </header>
+
+      {isEmpty ? (
+        <div class="grid grid-cols-12 gap-6 py-6">
+          <aside class="col-span-12 md:col-span-3 lg:col-span-3">
+            <CategoriesNav active={category} />
+          </aside>
+          <section class="col-span-12 md:col-span-9 lg:col-span-9 flex flex-col items-center justify-center py-24 text-center">
+            <p class="cat-display text-xl">No products in this category yet.</p>
+            <p class="text-sm text-[var(--cat-ink-muted)] mt-2">We're still cataloguing this section. Coming soon.</p>
+            <a href="/products" class="cat-btn cat-btn--ghost mt-6">Back to all categories</a>
+          </section>
+        </div>
+      ) : (
+        <div class="grid grid-cols-12 gap-6 py-6">
+          <aside class="col-span-12 md:col-span-3 lg:col-span-3 flex flex-col gap-8">
+            <CategoriesNav active={category} />
+            {COUNTRIES.map(c => (
+              <div data-country-rail={c.id} hidden>
+                <FilterRail facets={facetsByCountry[c.id]} count={productsByCountry[c.id].length} />
+              </div>
+            ))}
+          </aside>
+          <section class="col-span-12 md:col-span-9 lg:col-span-9">
+            <UtilityBar count={categoryProducts.length} />
+            <ProductGrid products={categoryProducts} />
+          </section>
+        </div>
+      )}
+
+      <pre data-products-json style="display:none">{productsJson}</pre>
+    </section>
+  </div>
+  {!isEmpty && <QuoteBasket />}
+  <script define:vars={{ category }}>
+    import('~/scripts/catalog/page-init').then(({ initCatalogPage }) => {
+      import('~/scripts/catalog/basket-ui').then(({ initBasketUi }) => {
+        import('~/scripts/catalog/country-modal').then(({ openCountryModal }) => {
+          function go() {
+            initBasketUi();
+            const empty = !document.querySelector('[data-country-modal]');
+            if (empty) return;
+            openCountryModal((picked) => {
+              initCatalogPage(picked, category);
+            });
+          }
+          if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go);
+          else go();
+        });
+      });
+    });
+  </script>
+</Base>
