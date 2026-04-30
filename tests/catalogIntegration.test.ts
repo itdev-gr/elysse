@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { applyFilters, byCountry, sortProducts } from '~/scripts/catalog/filter-engine';
+import { applyFilters, byCategory, byCountry, sortProducts } from '~/scripts/catalog/filter-engine';
 import { deriveFacets } from '~/scripts/catalog/derive-facets';
 import { encodeFilters, decodeFilters } from '~/scripts/catalog/url-state';
 import { EMPTY_FILTERS, type CatalogProduct } from '~/scripts/catalog/types';
@@ -55,5 +55,15 @@ describe('catalog integration', () => {
     // EN 1452 is on pvc-ball-valve only in this scoped set (saddle has ISO 8085, single-4-bolts has EN 1092-1)
     const en1452 = f.standards.find(s => s.value === 'EN 1452');
     expect(en1452?.count).toBe(1);
+  });
+
+  it('country-3 + valves narrows to pvc-ball-valve only', () => {
+    const out = byCategory(byCountry(demo, 'country-3'), 'valves');
+    expect(out.map(p => p.slug)).toEqual(['pvc-ball-valve']);
+  });
+
+  it('country-2 + compression-fittings narrows to epsilon only', () => {
+    const out = byCategory(byCountry(demo, 'country-2'), 'compression-fittings');
+    expect(out.map(p => p.slug)).toEqual(['epsilon', 'coupling-transition']);
   });
 });
