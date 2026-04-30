@@ -1,26 +1,21 @@
 ---
 import type { CatalogProduct } from '~/scripts/catalog/types';
-import { formatDN, formatPN } from '~/scripts/catalog/format';
 interface Props { product: CatalogProduct; }
 const { product: p } = Astro.props;
 const thumb = p.imageUrls[0] ?? p.image;
+const detailUrl = `/catalog/${p.categorySlug}/${p.slug}`;
 ---
 <article class="cat-card overflow-hidden flex flex-col" data-product-card data-slug={p.slug}>
-  <a href={`/catalog/${p.slug}`} class="block aspect-square bg-white">
+  <a href={detailUrl} class="block aspect-square bg-white">
     <img src={thumb} alt={p.name} loading="lazy" width="320" height="320" class="w-full h-full object-contain p-4" />
   </a>
   <div class="p-4 flex flex-col gap-2 flex-1">
     {p.code && <p class="cat-mono text-[11px] text-[var(--cat-ink-subtle)]">{p.code}</p>}
-    <a href={`/catalog/${p.slug}`} class="cat-display text-[22px] leading-tight hover:text-[var(--cat-accent)]">{p.name}</a>
+    <a href={detailUrl} class="cat-display text-[22px] leading-tight hover:text-[var(--cat-accent)]">{p.name}</a>
     <p class="text-xs text-[var(--cat-ink-muted)] line-clamp-2">{p.blurb}</p>
-    <div class="flex flex-wrap gap-1 mt-2">
-      {p.pnRating !== undefined && <span class="cat-chip">{formatPN(p.pnRating)}</span>}
-      {p.dnRange && <span class="cat-chip">{formatDN(p.dnRange)}</span>}
-      {p.material && <span class="cat-chip">{p.material.split('/')[0].trim()}</span>}
-    </div>
     <div class="flex items-center justify-between mt-auto pt-3">
       <button data-add-to-quote data-slug={p.slug} data-name={p.name} data-code={p.code ?? ''} data-thumb={thumb} class="cat-btn cat-btn--ghost">Add to quote</button>
-      <a href={`/catalog/${p.slug}`} class="cat-mono text-[11px] text-[var(--cat-accent)] hover:text-[var(--cat-accent-bright)]">View →</a>
+      <a href={detailUrl} class="cat-mono text-[11px] text-[var(--cat-accent)] hover:text-[var(--cat-accent-bright)]">View →</a>
     </div>
   </div>
 </article>
