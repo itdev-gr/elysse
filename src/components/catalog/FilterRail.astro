@@ -13,8 +13,6 @@ const { facets } = Astro.props;
     </div>
     <button type="button" data-clear-filters class="hidden cat-mono text-[11px] text-[var(--cat-accent)] mb-3">Clear all</button>
     <div data-active-filters class="flex flex-wrap gap-1 mb-3"></div>
-    <FilterGroup title="Sector" facetKey="sectors" options={facets.sectors} defaultOpen />
-    <FilterGroup title="Material" facetKey="materials" options={facets.materials} defaultOpen />
     {facets.dn && <RangeFilter title="DN size" facetKey="dn" min={facets.dn.min} max={facets.dn.max} />}
     {facets.pn && <RangeFilter title="PN pressure" facetKey="pn" min={facets.pn.min} max={facets.pn.max} />}
     <FilterGroup title="Standards" facetKey="standards" options={facets.standards} />
