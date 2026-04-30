@@ -1,0 +1,39 @@
+---
+interface Props {
+  name: string;
+  slug: string;
+  image: string;
+  blurb: string;
+  leafletPdf?: string;
+}
+const { name, slug, image, blurb, leafletPdf } = Astro.props;
+---
+<a href={`/catalog/${slug}`} class="category-card block group">
+  <div class="aspect-[4/3] bg-[var(--cat-surface-raised)] overflow-hidden border border-[var(--cat-hairline)]">
+    <img
+      src={image}
+      alt={name}
+      loading="lazy"
+      class="w-full h-full object-contain p-6 group-hover:scale-[1.02] transition-transform duration-300"
+    />
+  </div>
+  <div class="mt-3">
+    <h3 class="cat-display text-xl group-hover:text-[var(--cat-accent)]">{name}</h3>
+    <p class="text-sm text-[var(--cat-ink-muted)] mt-1 line-clamp-2">{blurb}</p>
+    <div class="flex items-center justify-between mt-3">
+      <span class="cat-mono text-[11px] text-[var(--cat-accent)]">View products →</span>
+      {leafletPdf && (
+        <a
+          href={leafletPdf}
+          download
+          onclick="event.stopPropagation()"
+          class="cat-mono text-[11px] text-[var(--cat-ink-muted)] hover:text-[var(--cat-accent)] inline-flex items-center gap-1"
+          aria-label={`Download ${name} leaflet`}
+        >
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 1v7m0 0L3 5m3 3l3-3M2 11h8" stroke="currentColor" fill="none" stroke-width="1.2"/></svg>
+          Leaflet
+        </a>
+      )}
+    </div>
+  </div>
+</a>
