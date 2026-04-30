@@ -1,38 +1,36 @@
 ---
 import Base from '~/layouts/Base.astro';
-import ParticleFlow from '~/components/hero/ParticleFlow.astro';
-import ProductCard from '~/components/products/ProductCard.astro';
-import FilterRail from '~/components/products/FilterRail.astro';
+import CategoryCard from '~/components/products/CategoryCard.astro';
 import { getCollection } from 'astro:content';
+import '~/styles/catalog.css';
 
-const products = (await getCollection('products')).sort((a, b) => (b.data.featured ? 1 : 0) - (a.data.featured ? 1 : 0));
+const categories = (await getCollection('categories')).sort((a, b) => a.data.order - b.data.order);
 ---
-<Base title="Products — Elysee Irrigation" description="5,000+ product codes across four sectors. Compression fittings, valves, saddles, couplings.">
-  <ParticleFlow />
-  <section class="relative z-10 min-h-[60vh] flex items-end page-x pb-24 pt-32">
-    <div>
-      <p class="mono text-text-mono mb-4">Products</p>
-      <h1 class="display-xl font-display tracking-[-0.025em] leading-[0.88]">Products<span class="serif-italic">.</span></h1>
-      <p class="mono text-text-secondary mt-6">5,000+ codes · 4 sectors · 65 countries</p>
-    </div>
-  </section>
-
-  <section class="relative z-10 grid grid-cols-12 gap-6 page-x pb-32">
-    <div class="col-span-12 md:col-span-3 lg:col-span-2"><FilterRail /></div>
-    <div class="col-span-12 md:col-span-9 lg:col-span-10">
-      <div data-products-grid class="grid grid-cols-2 md:grid-cols-3 gap-6 auto-rows-[minmax(240px,auto)]">
-        {products.map(p => <ProductCard product={p} featured={p.data.featured} />)}
+<Base title="Products — Elysee Irrigation" description="13 product categories: compression fittings, valves, saddles, pipes, drainage, and more.">
+  <div class="catalog-scope">
+    <section class="page-x pt-24 pb-12">
+      <nav aria-label="Breadcrumb" class="cat-mono text-[11px] text-[var(--cat-ink-subtle)]">
+        <a href="/" class="hover:text-[var(--cat-accent)]">Home</a>
+        <span class="mx-2">/</span>
+        <span aria-current="page">Products</span>
+      </nav>
+      <header class="mt-6 mb-12">
+        <h1 class="cat-display text-5xl">Products</h1>
+        <p class="text-base text-[var(--cat-ink-muted)] mt-3 max-w-xl">
+          {categories.length} categories · 5,000+ product codes across agriculture, landscape, building, and industry.
+        </p>
+      </header>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {categories.map(c => (
+          <CategoryCard
+            name={c.data.name}
+            slug={c.data.slug ?? c.slug}
+            image={c.data.image}
+            blurb={c.data.blurb}
+            leafletPdf={c.data.leafletPdf}
+          />
+        ))}
       </div>
-    </div>
-  </section>
-
-  <section class="relative z-10 border-t border-hairline py-24 page-x flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-    <h2 class="display-sm font-display">Not sure which fitting fits?</h2>
-    <a href="/#contact" class="mono text-accent-bright hover:text-text-primary">Talk to an engineer →</a>
-  </section>
-
-  <script>
-    import { initProductsFilter } from '~/scripts/motion/timelines/productsFilter';
-    window.addEventListener('DOMContentLoaded', () => initProductsFilter());
-  </script>
+    </section>
+  </div>
 </Base>
