@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="400" height="400" fill="#ffffff"/>
+  <circle cx="200" cy="200" r="120" fill="none" stroke="#3d6b52" stroke-width="6"/>
+  <circle cx="200" cy="200" r="80" fill="none" stroke="#3d6b52" stroke-width="3"/>
+  <text x="200" y="60" font-family="system-ui, sans-serif" font-size="22" font-weight="600" fill="#3d6b52" text-anchor="middle">Elysée</text>
+  <text x="200" y="350" font-family="ui-monospace, monospace" font-size="16" fill="#52635a" text-anchor="middle">No. 331 Coupling</text>
+</svg>
