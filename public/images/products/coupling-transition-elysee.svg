@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="400" height="400" fill="#ffffff"/>
+  <rect x="80" y="170" width="240" height="60" fill="none" stroke="#0a1410" stroke-width="5"/>
+  <rect x="100" y="180" width="40" height="40" fill="#0a1410"/>
+  <rect x="260" y="180" width="40" height="40" fill="none" stroke="#0a1410" stroke-width="3"/>
+  <text x="200" y="55" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#0a1410" text-anchor="middle">Elysée</text>
+  <text x="200" y="370" font-family="ui-monospace, monospace" font-size="14" fill="#0a1410" text-anchor="middle">No. 330 Coupling — black</text>
+</svg>
