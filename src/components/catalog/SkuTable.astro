@@ -1,16 +1,21 @@
 ---
-interface SkuRow {
-  code: string;
-  size: string;
-  box?: number | string;
-  bag?: number | string;
-  note?: string;
-}
+import type { SkuRow } from '~/scripts/catalog/sku-tables';
 interface Props {
   rows: SkuRow[];
   title?: string;
 }
 const { rows, title = 'Available sizes' } = Astro.props;
+
+const hasCountrySplit = rows.some(r => r.code1 || r.code2);
+const hasMoq = rows.some(r => r.moq !== undefined && String(r.moq) !== '0' && r.moq !== '');
+const hasNpt = rows.some(r => r.npt !== undefined && String(r.npt) !== '0' && r.npt !== '');
+const hasNote = rows.some(r => r.note);
+
+function display(v: number | string | undefined): string {
+  if (v === undefined) return '';
+  if (v === 0 || v === '0') return '';
+  return String(v);
+}
 ---
 {rows.length > 0 && (
   <section class="sku-table-wrap mt-2">
@@ -19,24 +24,35 @@ const { rows, title = 'Available sizes' } = Astro.props;
       <table class="sku-table w-full text-sm">
         <thead>
           <tr>
-            <th rowspan="2" class="px-4 py-3 text-center">Code</th>
-            <th rowspan="2" class="px-4 py-3 text-center">Size</th>
-            <th colspan="2" class="px-4 py-2 text-center border-b border-white/30">Packing (pcs)</th>
-            <th rowspan="2" class="px-4 py-3 text-center">Note</th>
+            <th rowspan="2" class="px-3 py-2 text-center">Code</th>
+            <th rowspan="2" class="px-3 py-2 text-center">Size</th>
+            <th colspan="2" class="px-3 py-1 text-center border-b border-white/30">Packing (pcs)</th>
+            {hasMoq && <th rowspan="2" class="px-3 py-2 text-center">MOQ</th>}
+            {hasNpt && <th rowspan="2" class="px-3 py-2 text-center">NPT</th>}
+            {hasNote && <th rowspan="2" class="px-3 py-2 text-center">Note</th>}
           </tr>
           <tr>
-            <th class="px-4 py-2 text-center font-normal">Box</th>
-            <th class="px-4 py-2 text-center font-normal">Bag</th>
+            <th class="px-3 py-1 text-center font-normal">Box</th>
+            <th class="px-3 py-1 text-center font-normal">Bag</th>
           </tr>
         </thead>
         <tbody>
           {rows.map((r, i) => (
             <tr class={i % 2 === 1 ? 'bg-[var(--cat-surface-sunken)]' : ''}>
-              <td class="px-4 py-2 text-center cat-mono">{r.code}</td>
-              <td class="px-4 py-2 text-center">{r.size}</td>
-              <td class="px-4 py-2 text-center">{r.box ?? ''}</td>
-              <td class="px-4 py-2 text-center">{r.bag ?? ''}</td>
-              <td class="px-4 py-2 text-center">{r.note ?? ''}</td>
+              <td class="px-3 py-1.5 text-center cat-mono">
+                {hasCountrySplit ? (
+                  <>
+                    <span data-country="country-1">{r.code1 ?? ''}</span>
+                    <span data-country="country-2">{r.code2 ?? ''}</span>
+                  </>
+                ) : (r.code ?? '')}
+              </td>
+              <td class="px-3 py-1.5 text-center">{r.size}</td>
+              <td class="px-3 py-1.5 text-center">{display(r.box)}</td>
+              <td class="px-3 py-1.5 text-center">{display(r.bag)}</td>
+              {hasMoq && <td class="px-3 py-1.5 text-center">{display(r.moq)}</td>}
+              {hasNpt && <td class="px-3 py-1.5 text-center">{display(r.npt)}</td>}
+              {hasNote && <td class="px-3 py-1.5 text-center">{r.note ?? ''}</td>}
             </tr>
           ))}
         </tbody>
@@ -51,7 +67,7 @@ const { rows, title = 'Available sizes' } = Astro.props;
     color: var(--cat-surface-raised);
     font-family: 'Inter Tight', system-ui, sans-serif;
     font-weight: 600;
-    font-size: 13px;
+    font-size: 12px;
     border-color: rgba(255, 255, 255, 0.3);
   }
   .sku-table tbody tr {

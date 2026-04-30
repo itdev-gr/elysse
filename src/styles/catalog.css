@@ -127,3 +127,25 @@
   font-family: 'Inter Tight', system-ui, sans-serif;
   margin: 0;
 }
+
+/* Country-conditional content: only the matching country's elements are visible.
+ * Defaults to showing country-1 server-side; JS sets data-active-country on
+ * the catalog-detail root after the country is picked. */
+[data-catalog-detail] [data-country="country-1"] { display: inline; }
+[data-catalog-detail] [data-country="country-2"],
+[data-catalog-detail] [data-country="country-3"] { display: none; }
+
+[data-catalog-detail][data-active-country="country-2"] [data-country="country-1"] { display: none; }
+[data-catalog-detail][data-active-country="country-2"] [data-country="country-2"] { display: inline; }
+
+[data-catalog-detail][data-active-country="country-3"] [data-country="country-1"] { display: none; }
+[data-catalog-detail][data-active-country="country-3"] [data-country="country-3"] { display: inline; }
+
+/* Image variants are block, not inline. */
+[data-catalog-detail] img[data-country="country-1"] { display: block; }
+[data-catalog-detail] img[data-country="country-2"],
+[data-catalog-detail] img[data-country="country-3"] { display: none; }
+[data-catalog-detail][data-active-country="country-2"] img[data-country="country-1"] { display: none; }
+[data-catalog-detail][data-active-country="country-2"] img[data-country="country-2"] { display: block; }
+[data-catalog-detail][data-active-country="country-3"] img[data-country="country-1"] { display: none; }
+[data-catalog-detail][data-active-country="country-3"] img[data-country="country-3"] { display: block; }
