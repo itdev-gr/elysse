@@ -5,6 +5,8 @@ import type { CatalogProduct, CategorySlug } from '~/scripts/catalog/types';
 import DetailHero from '~/components/catalog/DetailHero.astro';
 import TabBar from '~/components/catalog/TabBar.astro';
 import RelatedProducts from '~/components/catalog/RelatedProducts.astro';
+import SkuTable from '~/components/catalog/SkuTable.astro';
+import { skuTableRowsForProduct } from '~/scripts/catalog/sku-tables';
 import CountryModal from '~/components/catalog/CountryModal.astro';
 import '~/styles/catalog.css';
 import QuoteBasket from '~/components/catalog/QuoteBasket.astro';
@@ -89,6 +91,7 @@ const related: CatalogProduct[] = all
         <span aria-current="page">{p.name}</span>
       </nav>
       <DetailHero product={p} />
+      <SkuTable rows={skuTableRowsForProduct(p.slug)} />
       <TabBar product={p} />
       <RelatedProducts products={related} />
       <section data-availability-gate class="border-t border-[var(--cat-hairline)] mt-12 py-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">

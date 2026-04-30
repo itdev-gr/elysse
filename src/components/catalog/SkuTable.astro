@@ -1,0 +1,63 @@
+---
+interface SkuRow {
+  code: string;
+  size: string;
+  box?: number | string;
+  bag?: number | string;
+  note?: string;
+}
+interface Props {
+  rows: SkuRow[];
+  title?: string;
+}
+const { rows, title = 'Available sizes' } = Astro.props;
+---
+{rows.length > 0 && (
+  <section class="sku-table-wrap mt-8">
+    {title && <h2 class="cat-display text-2xl mb-3">{title}</h2>}
+    <div class="overflow-x-auto border border-[var(--cat-hairline)] rounded-md">
+      <table class="sku-table w-full text-sm">
+        <thead>
+          <tr>
+            <th rowspan="2" class="px-4 py-3 text-center">Code</th>
+            <th rowspan="2" class="px-4 py-3 text-center">Size</th>
+            <th colspan="2" class="px-4 py-2 text-center border-b border-white/30">Packing (pcs)</th>
+            <th rowspan="2" class="px-4 py-3 text-center">Note</th>
+          </tr>
+          <tr>
+            <th class="px-4 py-2 text-center font-normal">Box</th>
+            <th class="px-4 py-2 text-center font-normal">Bag</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r, i) => (
+            <tr class={i % 2 === 1 ? 'bg-[var(--cat-surface-sunken)]' : ''}>
+              <td class="px-4 py-2 text-center cat-mono">{r.code}</td>
+              <td class="px-4 py-2 text-center">{r.size}</td>
+              <td class="px-4 py-2 text-center">{r.box ?? ''}</td>
+              <td class="px-4 py-2 text-center">{r.bag ?? ''}</td>
+              <td class="px-4 py-2 text-center">{r.note ?? ''}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+)}
+
+<style is:global>
+  .sku-table thead tr th {
+    background: var(--cat-accent);
+    color: var(--cat-surface-raised);
+    font-family: 'Inter Tight', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+  .sku-table tbody tr {
+    border-bottom: 1px solid var(--cat-hairline);
+  }
+  .sku-table tbody tr:last-child {
+    border-bottom: none;
+  }
+</style>
