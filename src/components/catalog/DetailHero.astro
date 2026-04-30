@@ -28,9 +28,9 @@ const skuRows = skuTableRowsForProduct(p.slug);
     <div class="bg-white border border-[var(--cat-hairline)] rounded-md aspect-square flex items-center justify-center">
       {perCountry ? (
         <>
-          <img src={perCountry['country-1']} data-country="country-1" alt={p.name} width="800" height="800" class="max-w-full max-h-full object-contain p-8" />
-          <img src={perCountry['country-2']} data-country="country-2" alt={p.name} width="800" height="800" class="max-w-full max-h-full object-contain p-8" />
-          {perCountry['country-3'] && <img src={perCountry['country-3']} data-country="country-3" alt={p.name} width="800" height="800" class="max-w-full max-h-full object-contain p-8" />}
+          <img src={perCountry['country-1']} data-for-country="country-1" alt={p.name} width="800" height="800" class="max-w-full max-h-full object-contain p-8" />
+          <img src={perCountry['country-2']} data-for-country="country-2" alt={p.name} width="800" height="800" class="max-w-full max-h-full object-contain p-8" />
+          {perCountry['country-3'] && <img src={perCountry['country-3']} data-for-country="country-3" alt={p.name} width="800" height="800" class="max-w-full max-h-full object-contain p-8" />}
         </>
       ) : (
         <img src={fallback} alt={p.name} width="800" height="800" class="max-w-full max-h-full object-contain p-8" />
