@@ -1,9 +1,12 @@
 ---
 import type { CatalogProduct } from '~/scripts/catalog/types';
 import KeySpecs from './KeySpecs.astro';
+import SkuTable from './SkuTable.astro';
+import { skuTableRowsForProduct } from '~/scripts/catalog/sku-tables';
 interface Props { product: CatalogProduct; }
 const { product: p } = Astro.props;
 const main = p.imageUrls[0] ?? p.image;
+const skuRows = skuTableRowsForProduct(p.slug);
 ---
 <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-6">
   <div class="lg:col-span-7">
@@ -21,6 +24,7 @@ const main = p.imageUrls[0] ?? p.image;
     <h1 class="cat-display text-4xl lg:text-5xl leading-tight">{p.name}</h1>
     <p class="text-sm text-[var(--cat-ink-muted)]">{p.blurb}</p>
     <KeySpecs product={p} />
+    {skuRows.length > 0 && <SkuTable rows={skuRows} title="Available sizes" />}
     <div class="flex flex-col gap-2 mt-2">
       <button data-add-to-quote data-slug={p.slug} data-name={p.name} data-code={p.code ?? ''} data-thumb={main} class="cat-btn cat-btn--primary">Add to quote</button>
       {p.datasheet && <a href={p.datasheet} class="cat-btn cat-btn--ghost"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 17v4h16v-4"/></svg>Download datasheet</a>}

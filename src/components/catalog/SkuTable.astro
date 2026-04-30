@@ -13,8 +13,8 @@ interface Props {
 const { rows, title = 'Available sizes' } = Astro.props;
 ---
 {rows.length > 0 && (
-  <section class="sku-table-wrap mt-8">
-    {title && <h2 class="cat-display text-2xl mb-3">{title}</h2>}
+  <section class="sku-table-wrap mt-2">
+    {title && <h3 class="cat-mono text-[11px] uppercase tracking-wider text-[var(--cat-ink-muted)] mb-2">{title}</h3>}
     <div class="overflow-x-auto border border-[var(--cat-hairline)] rounded-md">
       <table class="sku-table w-full text-sm">
         <thead>
