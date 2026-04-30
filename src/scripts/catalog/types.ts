@@ -9,6 +9,21 @@ export const COUNTRIES: ReadonlyArray<{ id: Country; label: string }> = [
   { id: 'country-3', label: 'Country 3' },
 ] as const;
 
+export type CategorySlug =
+  | 'compression-fittings' | 'hydraulic-fittings' | 'saddles'
+  | 'light-weight-fittings' | 'valves' | 'filters-and-dosers'
+  | 'micro-irrigation-and-sprinklers' | 'turf' | 'polyethylene-pipes'
+  | 'pvc-pressure-pipes-and-fittings' | 'network-drainage'
+  | 'cable-applications' | 'building-sewerage';
+
+export const CATEGORY_SLUGS: ReadonlyArray<CategorySlug> = [
+  'compression-fittings', 'hydraulic-fittings', 'saddles',
+  'light-weight-fittings', 'valves', 'filters-and-dosers',
+  'micro-irrigation-and-sprinklers', 'turf', 'polyethylene-pipes',
+  'pvc-pressure-pipes-and-fittings', 'network-drainage',
+  'cable-applications', 'building-sewerage'
+] as const;
+
 export interface CatalogProduct {
   slug: string;
   name: string;
