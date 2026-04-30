@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
-  <rect width="400" height="400" fill="#ffffff"/>
-  <circle cx="200" cy="200" r="120" fill="none" stroke="#0a1410" stroke-width="6"/>
-  <circle cx="200" cy="200" r="80" fill="none" stroke="#0a1410" stroke-width="3"/>
-  <rect x="160" y="80" width="80" height="240" fill="none" stroke="#0a1410" stroke-width="4"/>
-  <text x="200" y="55" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#0a1410" text-anchor="middle">Elysée</text>
-  <text x="200" y="370" font-family="ui-monospace, monospace" font-size="14" fill="#0a1410" text-anchor="middle">No. 331 — black</text>
-</svg>
