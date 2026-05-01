@@ -8,7 +8,7 @@ node_modules
 coverage
 tests
 docs
-scripts
+/scripts
 *.log
 .DS_Store
 before-*.png
