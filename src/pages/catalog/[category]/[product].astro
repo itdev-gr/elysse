@@ -1,12 +1,12 @@
 ---
-import Base from '~/layouts/Base.astro';
+import Base from '../../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
-import type { CatalogProduct, CategorySlug } from '~/scripts/catalog/types';
-import DetailHero from '~/components/catalog/DetailHero.astro';
-import RelatedProducts from '~/components/catalog/RelatedProducts.astro';
-import CountryModal from '~/components/catalog/CountryModal.astro';
-import '~/styles/catalog.css';
-import QuoteBasket from '~/components/catalog/QuoteBasket.astro';
+import type { CatalogProduct, CategorySlug } from '../../../scripts/catalog/types';
+import DetailHero from '../../../components/catalog/DetailHero.astro';
+import RelatedProducts from '../../../components/catalog/RelatedProducts.astro';
+import CountryModal from '../../../components/catalog/CountryModal.astro';
+import '../../../styles/catalog.css';
+import QuoteBasket from '../../../components/catalog/QuoteBasket.astro';
 
 export async function getStaticPaths() {
   const products = await getCollection('products');
@@ -94,10 +94,10 @@ const related: CatalogProduct[] = all
   </div>
   <QuoteBasket />
   <script>
-    import { initDetailPage } from '~/scripts/catalog/page-init-detail';
-    import { initBasketUi } from '~/scripts/catalog/basket-ui';
-    import { openCountryModal } from '~/scripts/catalog/country-modal';
-    import { readCountry, writeCountry } from '~/scripts/catalog/country';
+    import { initDetailPage } from '../../../scripts/catalog/page-init-detail';
+    import { initBasketUi } from '../../../scripts/catalog/basket-ui';
+    import { openCountryModal } from '../../../scripts/catalog/country-modal';
+    import { readCountry, writeCountry } from '../../../scripts/catalog/country';
 
     function go() {
       initBasketUi();

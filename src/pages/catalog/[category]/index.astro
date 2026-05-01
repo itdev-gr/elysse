@@ -1,16 +1,16 @@
 ---
-import Base from '~/layouts/Base.astro';
+import Base from '../../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
-import { deriveFacets } from '~/scripts/catalog/derive-facets';
-import { byCategory, byCountry } from '~/scripts/catalog/filter-engine';
-import { COUNTRIES, type Country, type CatalogProduct, type CategorySlug } from '~/scripts/catalog/types';
-import '~/styles/catalog.css';
-import UtilityBar from '~/components/catalog/UtilityBar.astro';
-import ProductGrid from '~/components/catalog/ProductGrid.astro';
-import FilterRail from '~/components/catalog/FilterRail.astro';
-import QuoteBasket from '~/components/catalog/QuoteBasket.astro';
-import CountryModal from '~/components/catalog/CountryModal.astro';
-import CategoriesNav from '~/components/catalog/CategoriesNav.astro';
+import { deriveFacets } from '../../../scripts/catalog/derive-facets';
+import { byCategory, byCountry } from '../../../scripts/catalog/filter-engine';
+import { COUNTRIES, type Country, type CatalogProduct, type CategorySlug } from '../../../scripts/catalog/types';
+import '../../../styles/catalog.css';
+import UtilityBar from '../../../components/catalog/UtilityBar.astro';
+import ProductGrid from '../../../components/catalog/ProductGrid.astro';
+import FilterRail from '../../../components/catalog/FilterRail.astro';
+import QuoteBasket from '../../../components/catalog/QuoteBasket.astro';
+import CountryModal from '../../../components/catalog/CountryModal.astro';
+import CategoriesNav from '../../../components/catalog/CategoriesNav.astro';
 
 export async function getStaticPaths() {
   const categories = await getCollection('categories');
@@ -107,10 +107,10 @@ const productsJson = JSON.stringify(products);
   </div>
   {!isEmpty && <QuoteBasket />}
   <script>
-    import { initCatalogPage } from '~/scripts/catalog/page-init';
-    import { initBasketUi } from '~/scripts/catalog/basket-ui';
-    import { openCountryModal } from '~/scripts/catalog/country-modal';
-    import { readCountry, writeCountry } from '~/scripts/catalog/country';
+    import { initCatalogPage } from '../../../scripts/catalog/page-init';
+    import { initBasketUi } from '../../../scripts/catalog/basket-ui';
+    import { openCountryModal } from '../../../scripts/catalog/country-modal';
+    import { readCountry, writeCountry } from '../../../scripts/catalog/country';
 
     function go() {
       initBasketUi();

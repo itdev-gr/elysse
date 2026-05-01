@@ -1,9 +1,9 @@
 ---
-import Base from '~/layouts/Base.astro';
-import CategoryCard from '~/components/products/CategoryCard.astro';
-import CountryModal from '~/components/catalog/CountryModal.astro';
+import Base from '../../layouts/Base.astro';
+import CategoryCard from '../../components/products/CategoryCard.astro';
+import CountryModal from '../../components/catalog/CountryModal.astro';
 import { getCollection } from 'astro:content';
-import '~/styles/catalog.css';
+import '../../styles/catalog.css';
 
 const categories = (await getCollection('categories')).sort((a, b) => a.data.order - b.data.order);
 ---
@@ -36,8 +36,8 @@ const categories = (await getCollection('categories')).sort((a, b) => a.data.ord
     </section>
   </div>
   <script>
-    import { openCountryModal } from '~/scripts/catalog/country-modal';
-    import { readCountry, writeCountry } from '~/scripts/catalog/country';
+    import { openCountryModal } from '../../scripts/catalog/country-modal';
+    import { readCountry, writeCountry } from '../../scripts/catalog/country';
 
     function go() {
       // Pick-once: only prompt when nothing is stored yet.
