@@ -17,12 +17,6 @@
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
-    },
-    {
-      "source": "/(.*\\.(svg|jpg|jpeg|png|webp|avif))",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400, must-revalidate" }
-      ]
     }
   ]
 }
