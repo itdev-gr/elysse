@@ -3,7 +3,6 @@ import Base from '~/layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import type { CatalogProduct, CategorySlug } from '~/scripts/catalog/types';
 import DetailHero from '~/components/catalog/DetailHero.astro';
-import TabBar from '~/components/catalog/TabBar.astro';
 import RelatedProducts from '~/components/catalog/RelatedProducts.astro';
 import CountryModal from '~/components/catalog/CountryModal.astro';
 import '~/styles/catalog.css';
@@ -89,7 +88,6 @@ const related: CatalogProduct[] = all
         <span aria-current="page">{p.name}</span>
       </nav>
       <DetailHero product={p} />
-      <TabBar product={p} />
       <RelatedProducts products={related} />
       <section data-availability-gate class="border-t border-[var(--cat-hairline)] mt-12 py-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
