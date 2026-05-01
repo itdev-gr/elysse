@@ -1,6 +1,5 @@
 ---
 import type { CatalogProduct } from '~/scripts/catalog/types';
-import KeySpecs from './KeySpecs.astro';
 import SkuTable from './SkuTable.astro';
 import { skuTableRowsForProduct } from '~/scripts/catalog/sku-tables';
 import { imagesForProduct } from '~/scripts/catalog/per-country-images';
@@ -35,7 +34,6 @@ const skuRows = skuTableRowsForProduct(p.slug);
     {p.code && <p class="cat-mono text-[11px] text-[var(--cat-ink-subtle)]">{p.code}</p>}
     <h1 class="cat-display text-4xl lg:text-5xl leading-tight">{p.name}</h1>
     <p class="text-sm text-[var(--cat-ink-muted)]">{p.blurb}</p>
-    <KeySpecs product={p} />
     {skuRows.length > 0 && <SkuTable rows={skuRows} title="Available sizes" />}
     <div class="flex flex-col gap-2 mt-2">
       <button data-add-to-quote data-slug={p.slug} data-name={p.name} data-code={p.code ?? ''} data-thumb={fallback} class="cat-btn cat-btn--primary">Add to quote</button>
