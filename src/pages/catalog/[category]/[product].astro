@@ -89,16 +89,7 @@ const related: CatalogProduct[] = all
       </nav>
       <DetailHero product={p} />
       <RelatedProducts products={related} />
-      <section data-availability-gate class="border-t border-[var(--cat-hairline)] mt-12 py-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div>
-          <h2 class="cat-display text-2xl">Need this in your project?</h2>
-          <p class="text-xs text-[var(--cat-ink-muted)] mt-1">We respond within one business day.</p>
-        </div>
-        <div class="flex gap-3">
-          <button data-add-to-quote data-slug={p.slug} data-name={p.name} data-code={p.code ?? ''} data-thumb={p.imageUrls[0] ?? p.image} class="cat-btn cat-btn--primary">Request a quote</button>
-          <a href="/#contact" class="cat-btn cat-btn--ghost">Talk to engineering</a>
-        </div>
-      </section>
+      <section data-availability-gate></section>
     </section>
   </div>
   <QuoteBasket />
