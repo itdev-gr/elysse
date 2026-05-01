@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import { fileURLToPath } from 'node:url';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
@@ -22,6 +23,9 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    resolve: {
+      alias: { '~': fileURLToPath(new URL('./src', import.meta.url)) }
+    },
     ssr: { noExternal: ['gsap', 'ogl', 'lenis'] }
   },
   experimental: { clientPrerender: true }
