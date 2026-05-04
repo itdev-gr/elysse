@@ -7,7 +7,7 @@ const words = text.split(/\s+/);
   {words.map((w, i) => {
     const emphasis = emphasisWords.some(e => e.toLowerCase() === w.toLowerCase().replace(/[.,]/g, ''));
     return (
-      <span class="inline-block overflow-hidden align-bottom" data-word-wrap>
+      <span class="inline-block overflow-hidden align-bottom leading-[1.15]" data-word-wrap>
         <span
           class:list={['inline-block will-change-transform translate-y-full', emphasis && 'serif-italic']}
           data-word
