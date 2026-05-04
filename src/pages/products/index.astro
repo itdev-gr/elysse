@@ -37,11 +37,9 @@ const categories = (await getCollection('categories')).sort((a, b) => a.data.ord
   </div>
   <script>
     import { openCountryModal } from '../../scripts/catalog/country-modal.ts';
-    import { readCountry, writeCountry } from '../../scripts/catalog/country.ts';
+    import { writeCountry } from '../../scripts/catalog/country.ts';
 
     function go() {
-      // Pick-once: only prompt when nothing is stored yet.
-      if (readCountry()) return;
       openCountryModal((picked) => { writeCountry(picked); });
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go);

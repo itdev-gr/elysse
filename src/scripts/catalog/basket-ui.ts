@@ -4,8 +4,9 @@ export function initBasketUi() {
   const root = document.querySelector<HTMLElement>('[data-quote-basket]');
   if (!root) return;
 
-  const pill        = root.querySelector<HTMLButtonElement>('[data-basket-pill]')!;
-  const countEl     = root.querySelector<HTMLElement>('[data-basket-count]')!;
+  const pill        = root.querySelector<HTMLButtonElement>('[data-basket-pill]');
+  const countEl     = root.querySelector<HTMLElement>('[data-basket-count]');
+  if (!pill || !countEl) return;
   const drawer      = root.querySelector<HTMLElement>('[data-basket-drawer]')!;
   const closeBtn    = root.querySelector<HTMLButtonElement>('[data-basket-close]')!;
   const itemsList   = root.querySelector<HTMLElement>('[data-basket-items]')!;
